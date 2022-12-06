@@ -17,8 +17,9 @@ namespace SerwisSamochodowy.Model
         public bool Naprawa { get; set; }
         public bool Naprawione { get; set; }
         public float Koszt { get; set; }
-        public List<Czesc> Czesci { get; set; }
-
+        private Mechanik _mechanik { get; set; }
+        private ZlecenieNaprawy _zlecenieNaprawy { get; set; }
+        private List<Czesc> _czesci { get; set; }
 
         #endregion
 
@@ -30,6 +31,11 @@ namespace SerwisSamochodowy.Model
         }
 
         void NaprawUsterke()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool PrzypiszCzesci()
         {
             throw new NotImplementedException();
         }

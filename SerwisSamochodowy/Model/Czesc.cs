@@ -18,7 +18,7 @@ namespace SerwisSamochodowy.Model
         public bool Zamowione { get; set; }
         public bool Dostarczone { get; set; }
         public bool Wymienione { get; set; }
-        public Usterka usterka { get; set; }
+        private Usterka usterka { get; set; }
 
         #endregion
 
