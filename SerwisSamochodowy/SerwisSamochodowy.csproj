@@ -66,7 +66,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Model\Kierownik.cs" />
     <Compile Include="Model\Klient.cs" />
+    <Compile Include="Model\Mechanik.cs" />
+    <Compile Include="Model\Pracownik.cs" />
+    <Compile Include="Model\Samochod.cs" />
+    <Compile Include="Model\Usterka.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

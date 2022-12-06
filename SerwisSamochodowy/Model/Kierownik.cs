@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SerwisSamochodowy.Model
 {
-    internal class Kierownik
+    internal class Kierownik : Pracownik
     {
     }
 }
