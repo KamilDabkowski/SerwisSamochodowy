@@ -73,6 +73,7 @@
     <Compile Include="Model\Pracownik.cs" />
     <Compile Include="Model\Samochod.cs" />
     <Compile Include="Model\Usterka.cs" />
+    <Compile Include="Model\ZlecenieNaprawy.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
