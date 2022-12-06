@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Model\Czesc.cs" />
+    <Compile Include="Model\Faktura.cs" />
     <Compile Include="Model\Kierownik.cs" />
     <Compile Include="Model\Klient.cs" />
     <Compile Include="Model\Mechanik.cs" />
