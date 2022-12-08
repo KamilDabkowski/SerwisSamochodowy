@@ -1,4 +1,5 @@
 ﻿using SerwisSamochodowy.Common;
+using SerwisSamochodowy.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,28 +14,92 @@ namespace SerwisSamochodowy.ViewModel
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
+        #region properties
+        public List<ZlecenieNaprawy> ZleceniaNaprawy { get; set; }
 
+        public ZlecenieNaprawy WybraneZlecenie { get; set; }
 
+        #endregion
 
-        private ICommand _loadedCommand;
-        public ICommand LoadedCommand
+        #region ctor
+
+        public MainWindowViewModel()
+        {
+
+        }
+
+        #endregion
+
+        #region commands
+
+        private ICommand _loaded;
+        public ICommand Loaded
         {
             get
             {
-                if (_loadedCommand == null)
-                    _loadedCommand = new RelayCommand(
+                if (_loaded == null)
+                    _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         Debug.WriteLine("not implemented");
+                         ZleceniaNaprawy = new List<ZlecenieNaprawy>();
+                         var zlecenieTestowe = new ZlecenieNaprawy(new Klient(), new Samochod { Marka = "Suzuki", Model = "Swift" }, new List<Usterka>());
+                         zlecenieTestowe.Zaplacone = true;
+                         zlecenieTestowe.DataPrzyjecia = DateTime.Today;
+
+                         ZleceniaNaprawy.Add(zlecenieTestowe);
+
+                         OnPropertyChanged(nameof(ZleceniaNaprawy));
                      },
                      (object argument) =>
                      {
                          return true;
                      }
                     );
-                return _loadedCommand;
+                return _loaded;
             }
         }
+
+        private ICommand _dodajNoweZlecenie;
+        public ICommand DodajNoweZlecenie
+        {
+            get
+            {
+                if (_dodajNoweZlecenie == null)
+                    _dodajNoweZlecenie = new RelayCommand(
+                     (object argument) =>
+                     {
+                         throw new NotImplementedException();
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _dodajNoweZlecenie;
+            }
+        }
+
+        private ICommand _szczegolyZlecenia;
+        public ICommand SzczegolyZlecenia
+        {
+            get
+            {
+                if (_szczegolyZlecenia == null)
+                    _szczegolyZlecenia = new RelayCommand(
+                     (object argument) =>
+                     {
+                         throw new NotImplementedException();
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _szczegolyZlecenia;
+            }
+        }
+
+        #endregion
 
         #region events
 

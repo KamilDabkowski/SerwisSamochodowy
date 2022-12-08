@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerwisSamochodowy.View"
         xmlns:vm="clr-namespace:SerwisSamochodowy.ViewModel"
+        xmlns:cv="clr-namespace:SerwisSamochodowy.Converters"
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Serwis samochodowy" Height="450" Width="800">
 
     <Behaviors:Interaction.Triggers>
         <Behaviors:EventTrigger EventName="Loaded">
@@ -18,8 +19,38 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
+
+    <Window.Resources>
+        <cv:SamochodToNazwaSamochoduConverter x:Key="samochodToNazwaSamochoduConverter"/>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu FontSize="15">
+            <MenuItem Header="Dodaj nowe" Command="{Binding DodajNoweZlecenie}"/>
+            <MenuItem Header="Pokaż szczegóły" Command="{Binding SzczegolyZlecenia}"/>
+        </Menu>
+
+        <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybraneZlecenie}"
+                  Grid.Row="1" CanUserAddRows="False"
+                  ItemsSource="{Binding ZleceniaNaprawy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  HorizontalAlignment="Left" SelectionMode="Extended" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="IdZlecenia" Width="*" Binding="{Binding IdZlecenie}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Samochód" Width="3*" Binding="{Binding Samochod, Converter={StaticResource samochodToNazwaSamochoduConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Data przyjęcia" Width="2*" Binding="{Binding DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding Naprawione}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zgłoszone" Width="*" Binding="{Binding ZgloszoneZakonczenieNapraw}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DataOdbioru" Width="2*" Binding="{Binding DataOdbioru, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zapłacone" Width="*" Binding="{Binding Zaplacone}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Odebrane" Width="*" Binding="{Binding Odebrane}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
