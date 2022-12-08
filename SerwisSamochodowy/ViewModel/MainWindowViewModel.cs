@@ -1,7 +1,9 @@
 ﻿using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model;
+using SerwisSamochodowy.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace SerwisSamochodowy.ViewModel
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         #region properties
-        public List<ZlecenieNaprawy> ZleceniaNaprawy { get; set; }
+        public ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy { get; set; }
 
         public ZlecenieNaprawy WybraneZlecenie { get; set; }
 
@@ -26,6 +28,20 @@ namespace SerwisSamochodowy.ViewModel
         public MainWindowViewModel()
         {
 
+        }
+
+        #endregion
+
+        #region methods
+        private void OtworzOknoSzczegolow(ZlecenieNaprawy wybraneZlecenie = null)
+        {
+            var szczegolyViewModel = new SzczegolyZleceniaViewModel(wybraneZlecenie);
+
+            var szczegolyWindow = new SzczegolyZleceniaWindow(szczegolyViewModel);
+            szczegolyWindow.ShowDialog();
+            WybraneZlecenie = ZleceniaNaprawy.Last();
+
+            OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
         }
 
         #endregion
@@ -41,7 +57,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         ZleceniaNaprawy = new List<ZlecenieNaprawy>();
+                         ZleceniaNaprawy = new ObservableCollection<ZlecenieNaprawy>();
                          var zlecenieTestowe = new ZlecenieNaprawy(new Klient(), new Samochod { Marka = "Suzuki", Model = "Swift" }, new List<Usterka>());
                          zlecenieTestowe.Zaplacone = true;
                          zlecenieTestowe.DataPrzyjecia = DateTime.Today;
@@ -68,7 +84,7 @@ namespace SerwisSamochodowy.ViewModel
                     _dodajNoweZlecenie = new RelayCommand(
                      (object argument) =>
                      {
-                         throw new NotImplementedException();
+                         OtworzOknoSzczegolow();
                      },
                      (object argument) =>
                      {
@@ -88,7 +104,7 @@ namespace SerwisSamochodowy.ViewModel
                     _szczegolyZlecenia = new RelayCommand(
                      (object argument) =>
                      {
-                         throw new NotImplementedException();
+                         OtworzOknoSzczegolow(WybraneZlecenie);
                      },
                      (object argument) =>
                      {

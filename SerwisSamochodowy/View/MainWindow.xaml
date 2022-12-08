@@ -12,7 +12,7 @@
 
     <Behaviors:Interaction.Triggers>
         <Behaviors:EventTrigger EventName="Loaded">
-            <Behaviors:InvokeCommandAction Command="{Binding LoadedCommand}" />
+            <Behaviors:InvokeCommandAction Command="{Binding Loaded}" />
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
@@ -35,7 +35,7 @@
             <MenuItem Header="Pokaż szczegóły" Command="{Binding SzczegolyZlecenia}"/>
         </Menu>
 
-        <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybraneZlecenie}"
+        <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybraneZlecenie, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="1" CanUserAddRows="False"
                   ItemsSource="{Binding ZleceniaNaprawy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
