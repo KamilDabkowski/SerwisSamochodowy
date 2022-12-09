@@ -17,9 +17,9 @@ namespace SerwisSamochodowy.Model
         public bool Naprawa { get; set; }
         public bool Naprawione { get; set; }
         public float Koszt { get; set; }
-        private Mechanik _mechanik { get; set; }
+        public Mechanik Mechanik { get; set; }
         private ZlecenieNaprawy _zlecenieNaprawy { get; set; }
-        private List<Czesc> _czesci { get; set; }
+        public List<Czesc> Czesci { get; set; }
 
         #endregion
 

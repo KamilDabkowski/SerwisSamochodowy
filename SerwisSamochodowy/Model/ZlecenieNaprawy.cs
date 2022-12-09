@@ -22,6 +22,7 @@ namespace SerwisSamochodowy.Model
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
         public List<Usterka> Usterki { get; set; }
+        public Faktura Faktura { get; set; }
 
         #endregion
 

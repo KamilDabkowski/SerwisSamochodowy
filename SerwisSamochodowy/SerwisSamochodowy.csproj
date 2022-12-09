@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Converters\MechanikToNazwiskoImieConverter.cs" />
     <Compile Include="Converters\SamochodToNazwaSamochoduConverter.cs" />
     <Compile Include="Model\Czesc.cs" />
     <Compile Include="Model\Faktura.cs" />

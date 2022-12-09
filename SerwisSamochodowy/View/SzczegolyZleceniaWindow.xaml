@@ -5,16 +5,111 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerwisSamochodowy.View"
         xmlns:vm="clr-namespace:SerwisSamochodowy.ViewModel"
+        xmlns:cv="clr-namespace:SerwisSamochodowy.Converters"
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="SzczegolyZleceniaWindow" Height="450" Width="800">
+        Title="SzczegolyZleceniaWindow" Height="500" Width="800">
+
+    <Behaviors:Interaction.Triggers>
+        <Behaviors:EventTrigger EventName="Loaded">
+            <Behaviors:InvokeCommandAction Command="{Binding Loaded}" />
+        </Behaviors:EventTrigger>
+    </Behaviors:Interaction.Triggers>
 
     <Window.DataContext>
         <vm:SzczegolyZleceniaViewModel/>
     </Window.DataContext>
-    
-    
-    <StackPanel>
-        <!--<Label Content="{Binding PoleTestowe}"/>-->
-        <Label Content="labl"/>
-    </StackPanel>
+
+    <Window.Resources>
+        <cv:MechanikToNazwiskoImieConverter x:Key="mechanikToNazwiskoImieConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!--klient-->
+        <Label Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Klient:"/>
+        <Label Grid.Row="1" Content="Numer telefonu:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Klient.NumerTelefonu}"/>
+
+        <!--samochód-->
+        <Label Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Samochód:"/>
+        <Label Grid.Row="4" Content="Marka:"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Marka}" />
+        <Label Grid.Row="5" Content="Model:"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Model}"/>
+        <Label Grid.Row="6" Content="Rok produkcji:"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.RokProdukcji}"/>
+        <Label Grid.Row="7" Content="Silnik:"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Silnik}"/>
+        <Label Grid.Row="8" Content="Nr rejestracyjny:"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.NumerRejestracyjny}"/>
+
+        <!--zlecenie naprawy-->
+        <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Zlecenie:"/>
+        <Label Grid.Row="1" Grid.Column="3"  Content="Data przyjęcia:"/>
+        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding ZlecenieNaprawy.DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
+        <Label Grid.Row="2" Grid.Column="3"  Content="Naprawione:"/>
+        <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Naprawione}" Margin="5"/>
+        <Label Grid.Row="3" Grid.Column="3"  Content="Zgłoszone zakończenie:"/>
+        <CheckBox Grid.Row="3" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.ZgloszoneZakonczenieNapraw}" Margin="5"/>
+        <Label Grid.Row="4" Grid.Column="3"  Content="Zapłacone:"/>
+        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Zaplacone}" Margin="5"/>
+        <Label Grid.Row="5" Grid.Column="3"  Content="Odebrane:"/>
+        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Odebrane}" Margin="5"/>
+        <Label Grid.Row="6" Grid.Column="3"  Content="Data odbioru:"/>
+        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding ZlecenieNaprawy.DataOdbioru, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
+        <Label Grid.Row="7" Grid.Column="3"  Content="Faktura:"/>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding ZlecenieNaprawy.Faktura.Numer}"/>
+        <Button Grid.Row="8" Grid.Column="3"  Content="Utwórz fakturę"/>
+
+        <!--usterki-->
+        <Label Grid.Row="9" Grid.Column="0" Content="Usterki:"/>
+        <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybranaUsterka, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="10" Grid.ColumnSpan="5" CanUserAddRows="False"
+                  ItemsSource="{Binding ZlecenieNaprawy.Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  HorizontalAlignment="Left" SelectionMode="Extended" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mechanik" Width="2*" Binding="{Binding Mechanik, Converter={StaticResource mechanikToNazwiskoImieConverter} }" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Opis" Width="4*" Binding="{Binding Opis}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Naprawa" Width="*" Binding="{Binding Naprawa}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Koszt" Width="*" Binding="{Binding Koszt}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding Naprawione}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Zgłoszone" Width="*" Binding="{Binding ZgloszoneZakonczenieNapraw}" IsReadOnly="False"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+        <Button Width="120" Content="Dodaj usterkę"/>
+        <Button Grid.Column="2" Width="120" Content="Lista części"/>
+        </Grid>
+    </Grid>
 </Window>
