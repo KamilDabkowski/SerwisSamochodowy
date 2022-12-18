@@ -78,9 +78,13 @@
     <Compile Include="Model\Usterka.cs" />
     <Compile Include="Model\ZlecenieNaprawy.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SzczegolyUsterkiViewModel.cs" />
     <Compile Include="ViewModel\SzczegolyZleceniaViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SzczegolyUsterkiWindow.xaml.cs">
+      <DependentUpon>SzczegolyUsterkiWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SzczegolyZleceniaWindow.xaml.cs">
       <DependentUpon>SzczegolyZleceniaWindow.xaml</DependentUpon>
@@ -115,6 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SzczegolyUsterkiWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
