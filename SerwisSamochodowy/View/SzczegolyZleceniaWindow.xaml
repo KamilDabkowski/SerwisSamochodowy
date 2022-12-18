@@ -8,7 +8,7 @@
         xmlns:cv="clr-namespace:SerwisSamochodowy.Converters"
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="SzczegolyZleceniaWindow" Height="500" Width="800">
+        Title="SzczegolyZleceniaWindow" Height="500" Width="1200">
 
     <Behaviors:Interaction.Triggers>
         <Behaviors:EventTrigger EventName="Loaded">
@@ -87,7 +87,7 @@
         <!--usterki-->
         <Label Grid.Row="9" Grid.Column="0" Content="Usterki:"/>
         <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybranaUsterka, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="10" Grid.ColumnSpan="5" CanUserAddRows="False"
+                  Grid.Row="10" Grid.ColumnSpan="4" CanUserAddRows="False"
                   ItemsSource="{Binding ZlecenieNaprawy.Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
@@ -102,6 +102,25 @@
             </DataGrid.Columns>
         </DataGrid>
 
+
+        <!--części-->
+        <Label Grid.Row="9" Grid.Column="5" Content="Lista części:"/>
+        <DataGrid x:Name="dgCzesci" SelectedItem="{Binding WybranaUsterka.Czesci, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="10" Grid.Column="5" CanUserAddRows="False"
+                  ItemsSource="{Binding WybranaUsterka.Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  HorizontalAlignment="Left" SelectionMode="Extended" Margin="10,0,0,0">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Width="4*" Binding="{Binding Mechanik, Converter={StaticResource mechanikToNazwiskoImieConverter} }" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Opis}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Zam." Width="*" Binding="{Binding Naprawa}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Koszt}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Naprawione}" IsReadOnly="False"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
         <Grid Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
@@ -109,7 +128,7 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
         <Button Width="120" Content="Dodaj usterkę"/>
-        <Button Grid.Column="2" Width="120" Content="Lista części"/>
+        <Button Grid.Column="2" Width="120" Content="Szczegóły usterki"/>
         </Grid>
     </Grid>
 </Window>
