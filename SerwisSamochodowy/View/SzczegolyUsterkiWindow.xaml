@@ -37,6 +37,7 @@
             <RowDefinition Height="28"/>
             <RowDefinition Height="28"/>
             <RowDefinition Height="28"/>
+            <RowDefinition Height="28"/>
         </Grid.RowDefinitions>
         
         <!--usterka-->
@@ -57,11 +58,48 @@
         <Label Grid.Row="5" Content="Naprawione:"/>
         <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding WybranaUsterka.Naprawione}"/>
 
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Zapisz"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Zapisz"/>
 
         <!--część-->
         <Label Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Część:"/>
 
+        <Label Grid.Column="3" Grid.Row="1" Content="Nazwa:"/>
+        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding WybranaCzesc.Nazwa}"/>
+
+        <Label Grid.Column="3" Grid.Row="2" Content="Numer:"/>
+        <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding WybranaCzesc.Numer}"/>
+
+        <Label Grid.Column="3" Grid.Row="3" Content="Cena:"/>
+        <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding WybranaCzesc.Cena}"/>
+
+        <Label Grid.Column="3" Grid.Row="4" Content="Zamówione:"/>
+        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding WybranaCzesc.Zamowione}"/>
+
+        <Label Grid.Column="3" Grid.Row="5" Content="Dostarczone:"/>
+        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding WybranaCzesc.Dostarczone}"/>
+
+        <Label Grid.Column="3" Grid.Row="6" Content="Wymienione:"/>
+        <CheckBox Grid.Row="6" Grid.Column="4" IsChecked="{Binding WybranaCzesc.Wymienione}"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2">
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Dodaj"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Zapisz" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgCzesci" SelectedItem="{Binding WybranaCzesc, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="8" Grid.ColumnSpan="5" CanUserAddRows="False"
+                  ItemsSource="{Binding WybranaUsterka.Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  HorizontalAlignment="Left" SelectionMode="Extended" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Width="4*" Binding="{Binding Nazwa}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Numer}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Cena" Width="*" Binding="{Binding Cena}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Zam." Width="*" Binding="{Binding Zamowione}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Dostarczone}" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Wymienione}" IsReadOnly="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 
