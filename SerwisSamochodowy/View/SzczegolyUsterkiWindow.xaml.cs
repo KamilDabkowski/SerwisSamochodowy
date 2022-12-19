@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace SerwisSamochodowy.View
         public SzczegolyUsterkiWindow()
         {
             InitializeComponent();
+        }
+
+        public SzczegolyUsterkiWindow(INotifyPropertyChanged viewModel) : this()
+        {
+            this.DataContext = viewModel;
         }
     }
 }

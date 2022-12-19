@@ -1,5 +1,6 @@
 ﻿using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model;
+using SerwisSamochodowy.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,17 +15,43 @@ namespace SerwisSamochodowy.ViewModel
 {
     internal class SzczegolyZleceniaViewModel : INotifyPropertyChanged
     {
+
+        #region properties
+
         public ZlecenieNaprawy ZlecenieNaprawy { get; set; }
         public Usterka WybranaUsterka { get; set; }
 
+        ObservableCollection<Czesc> Czesci { get; set; }
+
+        #endregion
+
+        #region ctor
+
         public SzczegolyZleceniaViewModel()
         {
+            Czesci = new ObservableCollection<Czesc>();
             ZlecenieNaprawy = new ZlecenieNaprawy(new Klient(), new Samochod { Marka = "asdfasdf", Model = "Swiasdfasdfft" }, new List<Usterka>());
         }
-        public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy)
+        public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
         {
             this.ZlecenieNaprawy = zlecenieNaprawy;
         }
+
+        #endregion
+
+        #region methods
+
+        private void OtworzOknoSzczegolow(ObservableCollection<Czesc> czesci = null, Usterka wybranaUsterka = null)
+        {
+            var szczegolyViewModel = new SzczegolyUsterkiViewModel(czesci, wybranaUsterka);
+
+            var szczegolyWindow = new SzczegolyUsterkiWindow(szczegolyViewModel);
+            szczegolyWindow.ShowDialog();
+
+            OnPropertyChanged(nameof(ZlecenieNaprawy), nameof(WybranaUsterka), nameof(Czesci));
+        }
+
+        #endregion
 
         #region commands
 
@@ -45,6 +72,46 @@ namespace SerwisSamochodowy.ViewModel
                      }
                     );
                 return _loaded;
+            }
+        }
+
+        private ICommand _dodajNowaUsterke;
+        public ICommand DodajNowaUsterke
+        {
+            get
+            {
+                if (_dodajNowaUsterke == null)
+                    _dodajNowaUsterke = new RelayCommand(
+                     (object argument) =>
+                     {
+                         OtworzOknoSzczegolow(Czesci);
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _dodajNowaUsterke;
+            }
+        }
+
+        private ICommand _szczegolyUsterki;
+        public ICommand SzczegolyUsterki
+        {
+            get
+            {
+                if (_szczegolyUsterki == null)
+                    _szczegolyUsterki = new RelayCommand(
+                     (object argument) =>
+                     {
+                         OtworzOknoSzczegolow(Czesci, WybranaUsterka);
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _szczegolyUsterki;
             }
         }
 

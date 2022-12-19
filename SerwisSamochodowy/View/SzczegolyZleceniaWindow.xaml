@@ -127,8 +127,8 @@
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
-        <Button Width="120" Content="Dodaj usterkę"/>
-        <Button Grid.Column="2" Width="120" Content="Szczegóły usterki"/>
+        <Button Width="120" Content="Dodaj usterkę" Command="{Binding DodajNowaUsterke}" />
+            <Button Grid.Column="2" Width="120" Content="Szczegóły usterki" Command="{Binding SzczegolyUsterki}" />
         </Grid>
     </Grid>
 </Window>
