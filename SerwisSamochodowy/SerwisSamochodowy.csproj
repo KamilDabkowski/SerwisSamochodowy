@@ -66,14 +66,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\Staticks.cs" />
     <Compile Include="Converters\MechanikToNazwiskoImieConverter.cs" />
     <Compile Include="Converters\SamochodToNazwaSamochoduConverter.cs" />
     <Compile Include="Model\Czesc.cs" />
     <Compile Include="Model\Faktura.cs" />
+    <Compile Include="Model\Helpers\ObslugaJSON.cs" />
     <Compile Include="Model\Kierownik.cs" />
     <Compile Include="Model\Klient.cs" />
     <Compile Include="Model\Mechanik.cs" />
-    <Compile Include="Model\Pracownik.cs" />
     <Compile Include="Model\Samochod.cs" />
     <Compile Include="Model\Usterka.cs" />
     <Compile Include="Model\ZlecenieNaprawy.cs" />

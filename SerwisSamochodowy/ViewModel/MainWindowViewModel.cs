@@ -1,5 +1,6 @@
 ﻿using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model;
+using SerwisSamochodowy.Model.Helpers;
 using SerwisSamochodowy.View;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,11 @@ namespace SerwisSamochodowy.ViewModel
             OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
         }
 
+        private void WczytajDaneZPlikow()
+        {
+            ZleceniaNaprawy = ObslugaJSON<ZlecenieNaprawy>.PobierzDaneZJSON(Staticks.PlikZlecenNaprawy);
+        }
+
         #endregion
 
         #region commands
@@ -57,12 +63,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         ZleceniaNaprawy = new ObservableCollection<ZlecenieNaprawy>();
-                         var zlecenieTestowe = new ZlecenieNaprawy(new Klient(), new Samochod { Marka = "Suzuki", Model = "Swift" }, new List<Usterka>());
-                         zlecenieTestowe.Zaplacone = true;
-                         zlecenieTestowe.DataPrzyjecia = DateTime.Today;
-
-                         ZleceniaNaprawy.Add(zlecenieTestowe);
+                         WczytajDaneZPlikow();
 
                          OnPropertyChanged(nameof(ZleceniaNaprawy));
                      },
