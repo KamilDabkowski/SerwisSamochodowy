@@ -65,6 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\BazaDanych.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\Staticks.cs" />
     <Compile Include="Converters\MechanikToNazwiskoImieConverter.cs" />

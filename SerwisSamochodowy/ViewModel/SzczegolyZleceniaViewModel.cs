@@ -1,5 +1,6 @@
 ﻿using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model;
+using SerwisSamochodowy.Model.Helpers;
 using SerwisSamochodowy.View;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace SerwisSamochodowy.ViewModel
 
         #region properties
 
-        public ZlecenieNaprawy ZlecenieNaprawy { get; set; }
+        public ZlecenieNaprawy WybraneZlecenie { get; set; }
         public Usterka WybranaUsterka { get; set; }
 
         ObservableCollection<Czesc> Czesci { get; set; }
@@ -30,11 +31,12 @@ namespace SerwisSamochodowy.ViewModel
         public SzczegolyZleceniaViewModel()
         {
             Czesci = new ObservableCollection<Czesc>();
-            ZlecenieNaprawy = new ZlecenieNaprawy(new Klient(), new Samochod { Marka = "asdfasdf", Model = "Swiasdfasdfft" }, new List<Usterka>());
+            WybraneZlecenie = new ZlecenieNaprawy(new Klient(), new Samochod(), new List<Usterka>());
         }
         public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
         {
-            this.ZlecenieNaprawy = zlecenieNaprawy;
+            if(zlecenieNaprawy != null)
+                this.WybraneZlecenie = zlecenieNaprawy;
         }
 
         #endregion
@@ -48,7 +50,23 @@ namespace SerwisSamochodowy.ViewModel
             var szczegolyWindow = new SzczegolyUsterkiWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
 
-            OnPropertyChanged(nameof(ZlecenieNaprawy), nameof(WybranaUsterka), nameof(Czesci));
+            OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka), nameof(Czesci));
+        }
+
+        private void ZapiszDane()
+        {
+            if (WybraneZlecenie.IdZlecenie < 1)
+            {
+                WybraneZlecenie.IdZlecenie = BazaDanych.ZleceniaNaprawy.LastOrDefault<ZlecenieNaprawy>().IdZlecenie + 1;
+                BazaDanych.ZleceniaNaprawy.Add(WybraneZlecenie);
+            }
+            else
+            {
+                var zastepowaneZlecenie = BazaDanych.ZleceniaNaprawy.FirstOrDefault(w => w.IdZlecenie == WybraneZlecenie.IdZlecenie);
+                var index = BazaDanych.ZleceniaNaprawy.IndexOf(zastepowaneZlecenie);
+                BazaDanych.ZleceniaNaprawy[index] = WybraneZlecenie;
+            }
+            ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
         }
 
         #endregion
@@ -64,7 +82,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         OnPropertyChanged(nameof(ZlecenieNaprawy));
+                         OnPropertyChanged(nameof(WybraneZlecenie));
                      },
                      (object argument) =>
                      {
@@ -72,6 +90,26 @@ namespace SerwisSamochodowy.ViewModel
                      }
                     );
                 return _loaded;
+            }
+        }
+
+        private ICommand _zapisz;
+        public ICommand Zapisz
+        {
+            get
+            {
+                if (_zapisz == null)
+                    _zapisz = new RelayCommand(
+                     (object argument) =>
+                     {
+                         ZapiszDane();
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _zapisz;
             }
         }
 

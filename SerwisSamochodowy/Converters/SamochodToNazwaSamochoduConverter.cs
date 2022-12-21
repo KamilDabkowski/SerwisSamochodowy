@@ -14,7 +14,7 @@ namespace SerwisSamochodowy.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value).GetType() == typeof(Samochod))
+            if (!(value is null) && (value).GetType() == typeof(Samochod))
                 return (value as Samochod).Marka + " " + (value as Samochod).Model;
 
             return string.Empty;

@@ -51,44 +51,44 @@
         <!--klient-->
         <Label Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Klient:"/>
         <Label Grid.Row="1" Content="Numer telefonu:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Klient.NumerTelefonu}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding WybraneZlecenie.Klient.NumerTelefonu}"/>
 
         <!--samochód-->
         <Label Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Samochód:"/>
         <Label Grid.Row="4" Content="Marka:"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Marka}" />
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding WybraneZlecenie.Samochod.Marka}" />
         <Label Grid.Row="5" Content="Model:"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Model}"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding WybraneZlecenie.Samochod.Model}"/>
         <Label Grid.Row="6" Content="Rok produkcji:"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.RokProdukcji}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding WybraneZlecenie.Samochod.RokProdukcji}"/>
         <Label Grid.Row="7" Content="Silnik:"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.Silnik}"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding WybraneZlecenie.Samochod.Silnik}"/>
         <Label Grid.Row="8" Content="Nr rejestracyjny:"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ZlecenieNaprawy.Samochod.NumerRejestracyjny}"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding WybraneZlecenie.Samochod.NumerRejestracyjny}"/>
 
         <!--zlecenie naprawy-->
         <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Zlecenie:"/>
         <Label Grid.Row="1" Grid.Column="3"  Content="Data przyjęcia:"/>
-        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding ZlecenieNaprawy.DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
+        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding WybraneZlecenie.DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
         <Label Grid.Row="2" Grid.Column="3"  Content="Naprawione:"/>
-        <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Naprawione}" Margin="5"/>
+        <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Naprawione}" Margin="5"/>
         <Label Grid.Row="3" Grid.Column="3"  Content="Zgłoszone zakończenie:"/>
-        <CheckBox Grid.Row="3" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.ZgloszoneZakonczenieNapraw}" Margin="5"/>
+        <CheckBox Grid.Row="3" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.ZgloszoneZakonczenieNapraw}" Margin="5"/>
         <Label Grid.Row="4" Grid.Column="3"  Content="Zapłacone:"/>
-        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Zaplacone}" Margin="5"/>
+        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Zaplacone}" Margin="5"/>
         <Label Grid.Row="5" Grid.Column="3"  Content="Odebrane:"/>
-        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding ZlecenieNaprawy.Odebrane}" Margin="5"/>
+        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Odebrane}" Margin="5"/>
         <Label Grid.Row="6" Grid.Column="3"  Content="Data odbioru:"/>
-        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding ZlecenieNaprawy.DataOdbioru, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
+        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding WybraneZlecenie.DataOdbioru, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
         <Label Grid.Row="7" Grid.Column="3"  Content="Faktura:"/>
-        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding ZlecenieNaprawy.Faktura.Numer}"/>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WybraneZlecenie.Faktura.Numer}"/>
         <Button Grid.Row="8" Grid.Column="3"  Content="Utwórz fakturę"/>
 
         <!--usterki-->
         <Label Grid.Row="9" Grid.Column="0" Content="Usterki:"/>
         <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybranaUsterka, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="10" Grid.ColumnSpan="4" CanUserAddRows="False"
-                  ItemsSource="{Binding ZlecenieNaprawy.Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  ItemsSource="{Binding WybraneZlecenie.Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
             <DataGrid.Columns>
@@ -128,7 +128,9 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
         <Button Width="120" Content="Dodaj usterkę" Command="{Binding DodajNowaUsterke}" />
-            <Button Grid.Column="2" Width="120" Content="Szczegóły usterki" Command="{Binding SzczegolyUsterki}" />
+        <Button Grid.Column="2" Width="120" Content="Szczegóły usterki" Command="{Binding SzczegolyUsterki}" />
         </Grid>
+
+        <Button Grid.Column="5" Grid.Row="11" HorizontalAlignment="Right" Width="120" Content="Zapisz" Command="{Binding Zapisz}" />
     </Grid>
 </Window>

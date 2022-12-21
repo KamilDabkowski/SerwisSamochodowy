@@ -1,4 +1,5 @@
-﻿using SerwisSamochodowy.Model.Helpers;
+﻿using Newtonsoft.Json;
+using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,10 @@ namespace SerwisSamochodowy.Model
 
         public int IdZlecenie { get; set; }
         public int IdKlient { get; set; }
+        [JsonIgnore]
         public Klient Klient { get; set; }
         public int IdSamochod { get; set; }
+        [JsonIgnore]
         public Samochod Samochod { get; set; }
         public DateTime DataPrzyjecia { get; set; }
         public bool Naprawione { get; set; }
@@ -22,7 +25,9 @@ namespace SerwisSamochodowy.Model
         public DateTime DataOdbioru { get; set; }
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
+        [JsonIgnore]
         public List<Usterka> Usterki { get; set; }
+        [JsonIgnore]
         public Faktura Faktura { get; set; }
 
         #endregion
@@ -31,6 +36,7 @@ namespace SerwisSamochodowy.Model
 
         public ZlecenieNaprawy(Klient klient, Samochod samochod, List<Usterka> usterki)
         {
+            DataPrzyjecia = DateTime.Now.Date;
             this.Klient = klient;
             this.Samochod = samochod;
             this.Usterki = usterki;

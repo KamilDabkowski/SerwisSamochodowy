@@ -1,4 +1,5 @@
-﻿using SerwisSamochodowy.Model.Helpers;
+﻿using Newtonsoft.Json;
+using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace SerwisSamochodowy.Model
         public bool Zamowione { get; set; }
         public bool Dostarczone { get; set; }
         public bool Wymienione { get; set; }
+        [JsonIgnore]
         private Usterka usterka { get; set; }
 
         #endregion
