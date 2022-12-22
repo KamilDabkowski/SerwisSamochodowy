@@ -28,7 +28,7 @@ namespace SerwisSamochodowy.ViewModel
 
         public MainWindowViewModel()
         {
-
+            ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
         }
 
         #endregion
@@ -45,15 +45,6 @@ namespace SerwisSamochodowy.ViewModel
             OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
         }
 
-        private void WczytajDaneZPlikow()
-        {
-            BazaDanych.ZleceniaNaprawy = ObslugaJSON<ZlecenieNaprawy>.PobierzDaneZJSON(Staticks.PlikZlecenNaprawy);
-            BazaDanych.Mechanicy = ObslugaJSON<Mechanik>.PobierzDaneZJSON(Staticks.PlikMechanikow);
-            BazaDanych.Kierownicy = ObslugaJSON<Kierownik>.PobierzDaneZJSON(Staticks.PlikKierownikow);
-            ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
-            //ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
-        }
-
         #endregion
 
         #region commands
@@ -67,7 +58,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         WczytajDaneZPlikow();
+                         BazaDanych.WczytajDaneZPlikow();
 
                          OnPropertyChanged(nameof(ZleceniaNaprawy));
                      },
