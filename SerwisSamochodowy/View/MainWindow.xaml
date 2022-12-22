@@ -33,7 +33,8 @@
         <Menu FontSize="15">
             <MenuItem Header="Dodaj nowe" Command="{Binding DodajNoweZlecenie}"/>
             <MenuItem Header="Pokaż szczegóły" Command="{Binding SzczegolyZlecenia}"/>
-            <MenuItem Header="Nowy mechanik" Command="{Binding DodajMechanika}"/>
+            <MenuItem Header="Kierownicy" Command="{Binding DodajKierownika}"/>
+            <MenuItem Header="Mechanicy" Command="{Binding DodajMechanika}"/>
         </Menu>
 
         <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybraneZlecenie, UpdateSourceTrigger=PropertyChanged}"

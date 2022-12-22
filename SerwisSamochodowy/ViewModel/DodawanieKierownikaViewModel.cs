@@ -1,6 +1,6 @@
 ﻿using SerwisSamochodowy.Common;
-using SerwisSamochodowy.Model;
 using SerwisSamochodowy.Model.Helpers;
+using SerwisSamochodowy.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,33 +11,33 @@ using System.Windows.Input;
 
 namespace SerwisSamochodowy.ViewModel
 {
-    internal class DodawanieMechanikaViewModel : ViewModelBase
+    internal class DodawanieKierownikaViewModel : ViewModelBase
     {
         #region properties
 
-        private Mechanik _wybranyMechanik;
+        private Kierownik _wybranyKierownik;
 
-        public Mechanik WybranyMechanik
+        public Kierownik WybranyKierownik
         {
-            get { return _wybranyMechanik; }
+            get { return _wybranyKierownik; }
             set
             {
-                _wybranyMechanik = value;
-                OnPropertyChanged(nameof(WybranyMechanik));
+                _wybranyKierownik = value;
+                OnPropertyChanged(nameof(WybranyKierownik));
             }
         }
 
 
-        public ObservableCollection<Mechanik> Mechanicy { get; set; }
+        public ObservableCollection<Kierownik> Kierownicy { get; set; }
 
         #endregion
 
         #region ctor
-        public DodawanieMechanikaViewModel()
+        public DodawanieKierownikaViewModel()
         {
-            WybranyMechanik = new Mechanik();
+            WybranyKierownik = new Kierownik();
 
-            Mechanicy = BazaDanych.Mechanicy;
+            Kierownicy = BazaDanych.Kierownicy;
         }
 
         #endregion
@@ -46,20 +46,20 @@ namespace SerwisSamochodowy.ViewModel
 
         private void ZapiszDane()
         {
-            if (WybranyMechanik.IdMechanik == 0)
+            if (WybranyKierownik.IdKierownik == 0)
             {
-                var ostatni = Mechanicy.LastOrDefault();
+                var ostatni = Kierownicy.LastOrDefault();
                 int id = 0;
                 if (ostatni != null)
-                    id = ostatni.IdMechanik;
-                WybranyMechanik.IdMechanik = ++id;
-                Mechanicy.Add(WybranyMechanik);
+                    id = ostatni.IdKierownik;
+                WybranyKierownik.IdKierownik = ++id;
+                Kierownicy.Add(WybranyKierownik);
             }
 
-            ObslugaJSON<Mechanik>.ZapiszDoJSON(Mechanicy, Staticks.PlikMechanikow);
+            ObslugaJSON<Kierownik>.ZapiszDoJSON(Kierownicy, Staticks.PlikKierownikow);
 
-            WybranyMechanik = new Mechanik();
-            OnPropertyChanged(nameof(WybranyMechanik));
+            WybranyKierownik = new Kierownik();
+            OnPropertyChanged(nameof(WybranyKierownik));
         }
 
         #endregion
@@ -79,7 +79,8 @@ namespace SerwisSamochodowy.ViewModel
                      },
                      (object argument) =>
                      {
-                         if (!string.IsNullOrEmpty(WybranyMechanik.Imie) && !string.IsNullOrEmpty(WybranyMechanik.Nazwisko))
+                         if (!string.IsNullOrEmpty(WybranyKierownik.Imie) && !string.IsNullOrEmpty(WybranyKierownik.Nazwisko)
+                         && !string.IsNullOrEmpty(WybranyKierownik.Login) && !string.IsNullOrEmpty(WybranyKierownik.Haslo))
                              return true;
                          else
                              return false;

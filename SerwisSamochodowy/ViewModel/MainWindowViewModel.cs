@@ -45,16 +45,11 @@ namespace SerwisSamochodowy.ViewModel
             OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
         }
 
-        private void OtworzOknoMechanika()
-        {
-            var mechanikWindow = new DodawanieMechanikaWindow();
-            mechanikWindow.ShowDialog();
-        }
-
         private void WczytajDaneZPlikow()
         {
             BazaDanych.ZleceniaNaprawy = ObslugaJSON<ZlecenieNaprawy>.PobierzDaneZJSON(Staticks.PlikZlecenNaprawy);
             BazaDanych.Mechanicy = ObslugaJSON<Mechanik>.PobierzDaneZJSON(Staticks.PlikMechanikow);
+            BazaDanych.Kierownicy = ObslugaJSON<Kierownik>.PobierzDaneZJSON(Staticks.PlikKierownikow);
             ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
             //ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
         }
@@ -125,6 +120,27 @@ namespace SerwisSamochodowy.ViewModel
             }
         }
 
+        private ICommand _dodajKierownika;
+        public ICommand DodajKierownika
+        {
+            get
+            {
+                if (_dodajKierownika == null)
+                    _dodajKierownika = new RelayCommand(
+                     (object argument) =>
+                     {
+                         var kierownikWindow = new DodawanieKierownikaWindow();
+                         kierownikWindow.ShowDialog();
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _dodajKierownika;
+            }
+        }
+
         private ICommand _dodajMechanika;
         public ICommand DodajMechanika
         {
@@ -134,7 +150,8 @@ namespace SerwisSamochodowy.ViewModel
                     _dodajMechanika = new RelayCommand(
                      (object argument) =>
                      {
-                         OtworzOknoMechanika();
+                         var mechanikWindow = new DodawanieMechanikaWindow();
+                         mechanikWindow.ShowDialog();
                      },
                      (object argument) =>
                      {

@@ -12,5 +12,6 @@ namespace SerwisSamochodowy.Common
     {
         public static ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy;
         public static ObservableCollection<Mechanik> Mechanicy;
+        public static ObservableCollection<Kierownik> Kierownicy;
     }
 }
