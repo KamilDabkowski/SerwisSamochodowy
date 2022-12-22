@@ -46,18 +46,7 @@ namespace SerwisSamochodowy.ViewModel
 
         private void ZapiszDane()
         {
-            if (WybranyKierownik.IdKierownik == 0)
-            {
-                var ostatni = Kierownicy.LastOrDefault();
-                int id = 0;
-                if (ostatni != null)
-                    id = ostatni.IdKierownik;
-                WybranyKierownik.IdKierownik = ++id;
-                Kierownicy.Add(WybranyKierownik);
-            }
-
-            ObslugaJSON<Kierownik>.ZapiszDoJSON(Kierownicy, Staticks.PlikKierownikow);
-
+            WybranyKierownik.ZapiszDane();
             WybranyKierownik = new Kierownik();
             OnPropertyChanged(nameof(WybranyKierownik));
         }

@@ -40,7 +40,8 @@ namespace SerwisSamochodowy.ViewModel
 
             var szczegolyWindow = new SzczegolyZleceniaWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
-            WybraneZlecenie = ZleceniaNaprawy.Last();
+            if(ZleceniaNaprawy.Count> 0)
+                WybraneZlecenie = ZleceniaNaprawy.Last();
 
             OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
         }

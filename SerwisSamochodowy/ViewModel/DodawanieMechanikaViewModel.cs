@@ -46,18 +46,7 @@ namespace SerwisSamochodowy.ViewModel
 
         private void ZapiszDane()
         {
-            if (WybranyMechanik.IdMechanik == 0)
-            {
-                var ostatni = Mechanicy.LastOrDefault();
-                int id = 0;
-                if (ostatni != null)
-                    id = ostatni.IdMechanik;
-                WybranyMechanik.IdMechanik = ++id;
-                Mechanicy.Add(WybranyMechanik);
-            }
-
-            ObslugaJSON<Mechanik>.ZapiszDoJSON(Mechanicy, Staticks.PlikMechanikow);
-
+            WybranyMechanik.ZapiszDane();
             WybranyMechanik = new Mechanik();
             OnPropertyChanged(nameof(WybranyMechanik));
         }
