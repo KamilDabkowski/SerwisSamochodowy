@@ -54,6 +54,7 @@ namespace SerwisSamochodowy.ViewModel
         private void WczytajDaneZPlikow()
         {
             BazaDanych.ZleceniaNaprawy = ObslugaJSON<ZlecenieNaprawy>.PobierzDaneZJSON(Staticks.PlikZlecenNaprawy);
+            BazaDanych.Mechanicy = ObslugaJSON<Mechanik>.PobierzDaneZJSON(Staticks.PlikMechanikow);
             ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
             //ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
         }

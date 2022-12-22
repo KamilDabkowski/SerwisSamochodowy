@@ -21,7 +21,7 @@ namespace SerwisSamochodowy.Model.Helpers
                 ObservableCollection<T> listaDanych = JsonConvert.DeserializeObject<ObservableCollection<T>>(dane);
                 return listaDanych;
             }
-            return null;
+            return new ObservableCollection<T>();
         }
         public static void ZapiszDoJSON(IEnumerable<T> listaDanych, string nazwaPliku)
         {

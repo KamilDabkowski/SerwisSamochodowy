@@ -11,5 +11,6 @@ namespace SerwisSamochodowy.Common
     internal static class BazaDanych
     {
         public static ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy;
+        public static ObservableCollection<Mechanik> Mechanicy;
     }
 }

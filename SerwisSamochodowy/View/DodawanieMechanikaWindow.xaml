@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SerwisSamochodowy.View"
         xmlns:vm="clr-namespace:SerwisSamochodowy.ViewModel"
         mc:Ignorable="d"
-        Title="DodawanieMechanikaWindow" Height="250" Width="300">
+        Title="DodawanieMechanikaWindow" Height="250" Width="400">
     <Window.DataContext>
         <vm:DodawanieMechanikaViewModel/>
     </Window.DataContext>
@@ -15,6 +15,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -34,6 +35,17 @@
         <Label Grid.Row="2" Content="Nazwisko"/>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding WybranyMechanik.Nazwisko, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button Grid.Column="1" Grid.Row="4" Content="Zapisz" Command="{Binding Zapisz}"/>
+        <DataGrid SelectedItem="{Binding WybranyMechanik, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.RowSpan="4" Grid.Column="2" CanUserAddRows="False"
+                  ItemsSource="{Binding Mechanicy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  HorizontalAlignment="Left" SelectionMode="Extended" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="50" Header="ID" Binding="{Binding IdMechanik}"/>
+                <DataGridTextColumn Width="*" Header="Imię" Binding="{Binding Imie}"/>
+                <DataGridTextColumn Width="*" Header="Nazwisko" Binding="{Binding Nazwisko}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="4" Content="Zapisz" Command="{Binding Zapisz}"/>
     </Grid>
 </Window>

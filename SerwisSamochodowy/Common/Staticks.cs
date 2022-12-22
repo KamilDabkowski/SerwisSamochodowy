@@ -10,5 +10,6 @@ namespace SerwisSamochodowy.Common
     {
         public const string FolderDanych = "dane\\";
         public const string PlikZlecenNaprawy = FolderDanych + "ZleceniaNaprawy.json";
+        public const string PlikMechanikow = FolderDanych + "Mechanicy.json";
     }
 }

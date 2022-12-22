@@ -1,7 +1,9 @@
 ﻿using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model;
+using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,20 @@ namespace SerwisSamochodowy.ViewModel
     {
         #region properties
 
-        public Mechanik WybranyMechanik { get; set; }
+        private Mechanik _wybranyMechanik;
+
+        public Mechanik WybranyMechanik
+        {
+            get { return _wybranyMechanik; }
+            set
+            {
+                _wybranyMechanik = value;
+                OnPropertyChanged(nameof(WybranyMechanik));
+            }
+        }
+
+
+        public ObservableCollection<Mechanik> Mechanicy { get; set; }
 
         #endregion
 
@@ -21,6 +36,8 @@ namespace SerwisSamochodowy.ViewModel
         public DodawanieMechanikaViewModel()
         {
             WybranyMechanik = new Mechanik();
+
+            Mechanicy = BazaDanych.Mechanicy;
         }
 
         #endregion
@@ -29,7 +46,17 @@ namespace SerwisSamochodowy.ViewModel
 
         private void ZapiszDane()
         {
-            throw new NotImplementedException();
+            if (WybranyMechanik.IdMechanik == 0)
+            {
+                var ostatni = Mechanicy.LastOrDefault();
+                int id = 0;
+                if (ostatni != null)
+                    id = ostatni.IdMechanik;
+                WybranyMechanik.IdMechanik = ++id;
+                Mechanicy.Add(WybranyMechanik);
+            }
+
+            ObslugaJSON<Mechanik>.ZapiszDoJSON(Mechanicy, Staticks.PlikMechanikow);
         }
 
         #endregion
