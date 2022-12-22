@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace SerwisSamochodowy.ViewModel
 {
-    internal class SzczegolyZleceniaViewModel : INotifyPropertyChanged
+    internal class SzczegolyZleceniaViewModel : ViewModelBase
     {
 
         #region properties
@@ -155,18 +155,5 @@ namespace SerwisSamochodowy.ViewModel
 
         #endregion
 
-        #region events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(params string[] nazwyWlasnosci)
-        {
-            if (PropertyChanged != null)
-            {
-                foreach (string nazwaWlasnosci in nazwyWlasnosci)
-                    PropertyChanged(this, new PropertyChangedEventArgs(nazwaWlasnosci));
-            }
-        }
-
-        #endregion
     }
 }

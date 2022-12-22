@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SerwisSamochodowy.ViewModel
 {
-    internal class SzczegolyUsterkiViewModel : INotifyPropertyChanged
+    internal class SzczegolyUsterkiViewModel : ViewModelBase
     {
 
         #region properties
@@ -38,20 +38,6 @@ namespace SerwisSamochodowy.ViewModel
                 this.WybranaUsterka = new Usterka();
             else
                 this.WybranaUsterka = usterka;
-        }
-
-        #endregion
-
-        #region events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(params string[] nazwyWlasnosci)
-        {
-            if (PropertyChanged != null)
-            {
-                foreach (string nazwaWlasnosci in nazwyWlasnosci)
-                    PropertyChanged(this, new PropertyChangedEventArgs(nazwaWlasnosci));
-            }
         }
 
         #endregion

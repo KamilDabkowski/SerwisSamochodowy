@@ -79,9 +79,14 @@
     <Compile Include="Model\Samochod.cs" />
     <Compile Include="Model\Usterka.cs" />
     <Compile Include="Model\ZlecenieNaprawy.cs" />
+    <Compile Include="ViewModel\DodawanieMechanikaViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\SzczegolyUsterkiViewModel.cs" />
     <Compile Include="ViewModel\SzczegolyZleceniaViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\DodawanieMechanikaWindow.xaml.cs">
+      <DependentUpon>DodawanieMechanikaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -120,6 +125,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\DodawanieMechanikaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

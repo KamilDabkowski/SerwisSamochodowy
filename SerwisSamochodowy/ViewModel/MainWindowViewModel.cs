@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace SerwisSamochodowy.ViewModel
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel : ViewModelBase
     {
         #region properties
         public ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy { get; set; }
@@ -43,6 +43,12 @@ namespace SerwisSamochodowy.ViewModel
             WybraneZlecenie = ZleceniaNaprawy.Last();
 
             OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
+        }
+
+        private void OtworzOknoMechanika()
+        {
+            var mechanikWindow = new DodawanieMechanikaWindow();
+            mechanikWindow.ShowDialog();
         }
 
         private void WczytajDaneZPlikow()
@@ -118,17 +124,23 @@ namespace SerwisSamochodowy.ViewModel
             }
         }
 
-        #endregion
-
-        #region events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(params string[] nazwyWlasnosci)
+        private ICommand _dodajMechanika;
+        public ICommand DodajMechanika
         {
-            if (PropertyChanged != null)
+            get
             {
-                foreach (string nazwaWlasnosci in nazwyWlasnosci)
-                    PropertyChanged(this, new PropertyChangedEventArgs(nazwaWlasnosci));
+                if (_dodajMechanika == null)
+                    _dodajMechanika = new RelayCommand(
+                     (object argument) =>
+                     {
+                         OtworzOknoMechanika();
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _dodajMechanika;
             }
         }
 

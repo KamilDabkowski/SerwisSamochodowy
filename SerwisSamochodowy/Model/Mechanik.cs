@@ -9,7 +9,7 @@ namespace SerwisSamochodowy.Model
 {
     internal class Mechanik
     {
-        public int IdPracownik { get; set; }
+        public int IdMechanik { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
     }
