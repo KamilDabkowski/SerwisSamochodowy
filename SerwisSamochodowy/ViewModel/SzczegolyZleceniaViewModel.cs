@@ -19,6 +19,19 @@ namespace SerwisSamochodowy.ViewModel
 
         #region properties
 
+        private string _numerTelefonuKlienta;
+        private int _idKlienta;
+
+        public string NumerTelefonuKlienta
+        {
+            get { return _numerTelefonuKlienta; }
+            set
+            {
+                _numerTelefonuKlienta = value;
+                _idKlienta = new KlientConstructor(NumerTelefonuKlienta).ZnajdzIdKlienta();
+            }
+        }
+
         public ZlecenieNaprawy WybraneZlecenie { get; set; }
         public Usterka WybranaUsterka { get; set; }
 
@@ -31,7 +44,7 @@ namespace SerwisSamochodowy.ViewModel
         public SzczegolyZleceniaViewModel()
         {
             Czesci = new ObservableCollection<Czesc>();
-            WybraneZlecenie = new ZlecenieNaprawy(new Klient(), new Samochod(), new List<Usterka>());
+            WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, new Samochod(), new List<Usterka>());
         }
         public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
         {

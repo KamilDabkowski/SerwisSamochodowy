@@ -10,13 +10,13 @@ namespace SerwisSamochodowy.Common
     {
         public const string FolderDanych = "dane\\";
 
-        public const string PlikCzesci = FolderDanych + "Kierownicy.json";
-        public const string PlikFaktur = FolderDanych + "Kierownicy.json";
+        public const string PlikCzesci = FolderDanych + "Czesci.json";
+        public const string PlikFaktur = FolderDanych + "Faktury.json";
         public const string PlikKierownikow = FolderDanych + "Kierownicy.json";
-        public const string PlikKlientow = FolderDanych + "Kierownicy.json";
+        public const string PlikKlientow = FolderDanych + "Klienci.json";
         public const string PlikMechanikow = FolderDanych + "Mechanicy.json";
-        public const string PlikSamochodow = FolderDanych + "Kierownicy.json";
-        public const string PlikUsterek = FolderDanych + "Kierownicy.json";
+        public const string PlikSamochodow = FolderDanych + "Samochody.json";
+        public const string PlikUsterek = FolderDanych + "Usterki.json";
         public const string PlikZlecenNaprawy = FolderDanych + "ZleceniaNaprawy.json";
     }
 }

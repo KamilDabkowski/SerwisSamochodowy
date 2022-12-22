@@ -28,6 +28,7 @@ namespace SerwisSamochodowy.ViewModel
 
         public MainWindowViewModel()
         {
+            BazaDanych.WczytajDaneZPlikow();
             ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
         }
 

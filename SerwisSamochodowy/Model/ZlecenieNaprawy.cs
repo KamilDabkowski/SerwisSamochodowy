@@ -14,8 +14,6 @@ namespace SerwisSamochodowy.Model
 
         public int IdZlecenie { get; set; }
         public int IdKlient { get; set; }
-        [JsonIgnore]
-        public Klient Klient { get; set; }
         public int IdSamochod { get; set; }
         [JsonIgnore]
         public Samochod Samochod { get; set; }
@@ -34,10 +32,10 @@ namespace SerwisSamochodowy.Model
 
         #region ctor
 
-        public ZlecenieNaprawy(Klient klient, Samochod samochod, List<Usterka> usterki)
+        public ZlecenieNaprawy(int idKlienta, Samochod samochod, List<Usterka> usterki)
         {
             DataPrzyjecia = DateTime.Now.Date;
-            this.Klient = klient;
+            this.IdKlient = idKlienta;
             this.Samochod = samochod;
             this.Usterki = usterki;
         }

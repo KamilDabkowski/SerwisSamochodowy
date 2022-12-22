@@ -51,7 +51,7 @@
         <!--klient-->
         <Label Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Klient:"/>
         <Label Grid.Row="1" Content="Numer telefonu:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding WybraneZlecenie.Klient.NumerTelefonu}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NumerTelefonuKlienta, UpdateSourceTrigger=LostFocus}"/>
 
         <!--samochód-->
         <Label Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Samochód:"/>
