@@ -15,5 +15,11 @@ namespace SerwisSamochodowy.Model
         public string Silnik { get; set; }
         public int RokProdukcji { get; set; }
         public string NumerRejestracyjny { get; set; }
+
+        public Samochod(int idSamochod, string numerRejestracyjny)
+        {
+            this.IdSamochod = idSamochod;
+            this.NumerRejestracyjny = numerRejestracyjny;
+        }
     }
 }

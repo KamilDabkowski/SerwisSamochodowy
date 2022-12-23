@@ -9,15 +9,15 @@ using System.Windows.Data;
 
 namespace SerwisSamochodowy.Converters
 {
-    internal class SamochodToNazwaSamochoduConverter : IValueConverter
+    internal class ObjectToBoolConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null && (value).GetType() == typeof(Samochod))
-                return (value as Samochod).Marka + " " + (value as Samochod).Model;
+            if (value is null)
+                return false;
 
-            return string.Empty;
+            return true;
 
         }
 
@@ -28,5 +28,3 @@ namespace SerwisSamochodowy.Converters
 
     }
 }
-
-

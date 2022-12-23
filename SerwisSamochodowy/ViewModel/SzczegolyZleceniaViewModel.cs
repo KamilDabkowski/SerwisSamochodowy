@@ -19,8 +19,9 @@ namespace SerwisSamochodowy.ViewModel
 
         #region properties
 
-        private string _numerTelefonuKlienta;
         private int _idKlienta;
+
+        private string _numerTelefonuKlienta;
 
         public string NumerTelefonuKlienta
         {
@@ -32,6 +33,20 @@ namespace SerwisSamochodowy.ViewModel
             }
         }
 
+        private string _numerRejestracyjny;
+
+        public string NumerRejestracyjny
+        {
+            get { return _numerRejestracyjny; }
+            set
+            {
+                _numerRejestracyjny = value;
+                WybranySamochod = new SamochodConstructor(NumerRejestracyjny).ZnajdzSamochod();
+                OnPropertyChanged(nameof(WybranySamochod));
+            }
+        }
+
+        public Samochod WybranySamochod { get; set; }
         public ZlecenieNaprawy WybraneZlecenie { get; set; }
         public Usterka WybranaUsterka { get; set; }
 
@@ -44,7 +59,8 @@ namespace SerwisSamochodowy.ViewModel
         public SzczegolyZleceniaViewModel()
         {
             Czesci = new ObservableCollection<Czesc>();
-            WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, new Samochod(), new List<Usterka>());
+            //todo temp, do wywalenia
+            //WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, 0, new List<Usterka>());
         }
         public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
         {
@@ -68,9 +84,26 @@ namespace SerwisSamochodowy.ViewModel
 
         private void ZapiszDane()
         {
+            ZapiszSamochod();
+
+            //todo odptaszyc
+            //ZapiszZlecenie();
+        }
+
+        private void ZapiszSamochod()
+        {
+            if (WybranySamochod != null)
+            {
+                BazaDanych.Samochody.Add(WybranySamochod);
+                ObslugaJSON<Samochod>.ZapiszDoJSON(BazaDanych.Samochody, Staticks.PlikSamochodow);
+            }
+        }
+
+        private void ZapiszZlecenie()
+        {
             if (WybraneZlecenie.IdZlecenie < 1)
             {
-                WybraneZlecenie.IdZlecenie = BazaDanych.ZleceniaNaprawy.LastOrDefault<ZlecenieNaprawy>().IdZlecenie + 1;
+                WybraneZlecenie.IdZlecenie = BazaDanych.ZleceniaNaprawy.LastOrDefault().IdZlecenie + 1;
                 BazaDanych.ZleceniaNaprawy.Add(WybraneZlecenie);
             }
             else
