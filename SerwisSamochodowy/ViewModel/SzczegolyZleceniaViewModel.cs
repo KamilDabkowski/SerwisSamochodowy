@@ -41,8 +41,13 @@ namespace SerwisSamochodowy.ViewModel
             set
             {
                 _numerRejestracyjny = value;
-                WybranySamochod = new SamochodConstructor(NumerRejestracyjny).ZnajdzSamochod();
-                OnPropertyChanged(nameof(WybranySamochod));
+
+                if (WybranySamochod == null || WybranySamochod.NumerRejestracyjny == null)
+                {
+                    WybranySamochod = new SamochodConstructor(NumerRejestracyjny).ZnajdzSamochod();
+                    WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, WybranySamochod.IdSamochod, new List<Usterka>());
+                }
+                OnPropertyChanged(nameof(WybranySamochod), nameof(NumerRejestracyjny), nameof(WybraneZlecenie));
             }
         }
 
@@ -59,13 +64,16 @@ namespace SerwisSamochodowy.ViewModel
         public SzczegolyZleceniaViewModel()
         {
             Czesci = new ObservableCollection<Czesc>();
-            //todo temp, do wywalenia
-            //WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, 0, new List<Usterka>());
         }
         public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
         {
-            if(zlecenieNaprawy != null)
+            if (zlecenieNaprawy != null)
+            {
                 this.WybraneZlecenie = zlecenieNaprawy;
+                NumerTelefonuKlienta = BazaDanych.Klienci.FirstOrDefault(k => k.IdKlient == zlecenieNaprawy.IdKlient).NumerTelefonu;
+                WybranySamochod = BazaDanych.Samochody.FirstOrDefault(s=>s.IdSamochod == WybraneZlecenie.IdSamochod);
+                NumerRejestracyjny = WybranySamochod.NumerRejestracyjny;
+            }
         }
 
         #endregion
@@ -85,9 +93,7 @@ namespace SerwisSamochodowy.ViewModel
         private void ZapiszDane()
         {
             ZapiszSamochod();
-
-            //todo odptaszyc
-            //ZapiszZlecenie();
+            ZapiszZlecenie();
         }
 
         private void ZapiszSamochod()
@@ -103,7 +109,12 @@ namespace SerwisSamochodowy.ViewModel
         {
             if (WybraneZlecenie.IdZlecenie < 1)
             {
-                WybraneZlecenie.IdZlecenie = BazaDanych.ZleceniaNaprawy.LastOrDefault().IdZlecenie + 1;
+                int id = 0;
+                var ostatnie = BazaDanych.ZleceniaNaprawy.LastOrDefault();
+                if (ostatnie != null)
+                    id = ostatnie.IdZlecenie;
+
+                WybraneZlecenie.IdZlecenie = ++id;
                 BazaDanych.ZleceniaNaprawy.Add(WybraneZlecenie);
             }
             else

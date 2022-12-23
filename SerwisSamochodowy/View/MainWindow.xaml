@@ -39,18 +39,18 @@
 
         <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybraneZlecenie, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="1" CanUserAddRows="False"
-                  ItemsSource="{Binding ZleceniaNaprawy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Zlecenia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="IdZlecenia" Width="*" Binding="{Binding IdZlecenie}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="IdZlecenia" Width="*" Binding="{Binding ZlecenieNaprawy.IdZlecenie}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Samochód" Width="3*" Binding="{Binding Samochod, Converter={StaticResource samochodToNazwaSamochoduConverter}}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Data przyjęcia" Width="2*" Binding="{Binding DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding Naprawione}" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Zgłoszone" Width="*" Binding="{Binding ZgloszoneZakonczenieNapraw}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DataOdbioru" Width="2*" Binding="{Binding DataOdbioru, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Zapłacone" Width="*" Binding="{Binding Zaplacone}" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Odebrane" Width="*" Binding="{Binding Odebrane}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Data przyjęcia" Width="2*" Binding="{Binding ZlecenieNaprawy.DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding ZlecenieNaprawy.Naprawione}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zgłoszone" Width="*" Binding="{Binding ZlecenieNaprawy.ZgloszoneZakonczenieNapraw}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DataOdbioru" Width="2*" Binding="{Binding ZlecenieNaprawy.DataOdbioru, StringFormat=yyyy-MM-dd}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zapłacone" Width="*" Binding="{Binding ZlecenieNaprawy.Zaplacone}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Odebrane" Width="*" Binding="{Binding ZlecenieNaprawy.Odebrane}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

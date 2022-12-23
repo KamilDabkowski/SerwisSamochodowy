@@ -77,17 +77,22 @@
         <Label Grid.Row="1" Grid.Column="3"  Content="Data przyjęcia:"/>
         <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding WybraneZlecenie.DataPrzyjecia, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
         <Label Grid.Row="2" Grid.Column="3"  Content="Naprawione:"/>
-        <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Naprawione}" Margin="5"/>
+        <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Naprawione}" Margin="5"
+                  IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
         <Label Grid.Row="3" Grid.Column="3"  Content="Zgłoszone zakończenie:"/>
-        <CheckBox Grid.Row="3" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.ZgloszoneZakonczenieNapraw}" Margin="5"/>
+        <CheckBox Grid.Row="3" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.ZgloszoneZakonczenieNapraw}" Margin="5"
+                  IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
         <Label Grid.Row="4" Grid.Column="3"  Content="Zapłacone:"/>
-        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Zaplacone}" Margin="5"/>
+        <CheckBox Grid.Row="4" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Zaplacone}" Margin="5"
+                  IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
         <Label Grid.Row="5" Grid.Column="3"  Content="Odebrane:"/>
-        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Odebrane}" Margin="5"/>
+        <CheckBox Grid.Row="5" Grid.Column="4" IsChecked="{Binding WybraneZlecenie.Odebrane}" Margin="5"
+                  IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
         <Label Grid.Row="6" Grid.Column="3"  Content="Data odbioru:"/>
         <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding WybraneZlecenie.DataOdbioru, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
         <Label Grid.Row="7" Grid.Column="3"  Content="Faktura:"/>
-        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WybraneZlecenie.Faktura.Numer}"/>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WybraneZlecenie.Faktura.Numer}"
+                 IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
         <Button Grid.Row="8" Grid.Column="3"  Content="Utwórz fakturę"/>
 
         <!--usterki-->

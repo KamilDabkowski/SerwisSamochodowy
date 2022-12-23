@@ -18,9 +18,9 @@ namespace SerwisSamochodowy.ViewModel
     internal class MainWindowViewModel : ViewModelBase
     {
         #region properties
-        public ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy { get; set; }
+        public ObservableCollection<ZlecenieNaprawyWrapper> Zlecenia { get; set; }
 
-        public ZlecenieNaprawy WybraneZlecenie { get; set; }
+        public ZlecenieNaprawyWrapper WybraneZlecenie { get; set; }
 
         #endregion
 
@@ -29,7 +29,7 @@ namespace SerwisSamochodowy.ViewModel
         public MainWindowViewModel()
         {
             BazaDanych.WczytajDaneZPlikow();
-            ZleceniaNaprawy = BazaDanych.ZleceniaNaprawy;
+            Zlecenia = new ZlecenieNaprawyWrapper().WczytajZlecenia();
         }
 
         #endregion
@@ -41,10 +41,10 @@ namespace SerwisSamochodowy.ViewModel
 
             var szczegolyWindow = new SzczegolyZleceniaWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
-            if(ZleceniaNaprawy.Count> 0)
-                WybraneZlecenie = ZleceniaNaprawy.Last();
 
-            OnPropertyChanged(nameof(ZleceniaNaprawy), nameof(WybraneZlecenie));
+            Zlecenia = new ZlecenieNaprawyWrapper().WczytajZlecenia();
+
+            OnPropertyChanged(nameof(Zlecenia), nameof(WybraneZlecenie));
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace SerwisSamochodowy.ViewModel
                      {
                          BazaDanych.WczytajDaneZPlikow();
 
-                         OnPropertyChanged(nameof(ZleceniaNaprawy));
+                         OnPropertyChanged(nameof(Zlecenia));
                      },
                      (object argument) =>
                      {
@@ -102,7 +102,7 @@ namespace SerwisSamochodowy.ViewModel
                     _szczegolyZlecenia = new RelayCommand(
                      (object argument) =>
                      {
-                         OtworzOknoSzczegolow(WybraneZlecenie);
+                         OtworzOknoSzczegolow(WybraneZlecenie.ZlecenieNaprawy);
                      },
                      (object argument) =>
                      {

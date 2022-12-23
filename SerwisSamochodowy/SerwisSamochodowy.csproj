@@ -76,6 +76,7 @@
     <Compile Include="Model\Helpers\KlientConstructor.cs" />
     <Compile Include="Model\Helpers\ObslugaJSON.cs" />
     <Compile Include="Model\Helpers\SamochodConstructor.cs" />
+    <Compile Include="Model\Helpers\ZlecenieNaprawyWrapper.cs" />
     <Compile Include="Model\Kierownik.cs" />
     <Compile Include="Model\Klient.cs" />
     <Compile Include="Model\Mechanik.cs" />
