@@ -20,6 +20,11 @@
         <vm:SzczegolyUsterkiViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <cv:MechanikToNazwiskoImieConverter x:Key="mechanikToNazwiskoImieConverter"/>
+        <cv:ObjectToBoolConverter x:Key="objectToBoolConverter"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -44,7 +49,22 @@
         <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Usterka:"/>
         
         <Label Grid.Row="1" Content="Mechanik:"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Text="{Binding WybranaUsterka.Mechanik}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding Mechanicy}"
+                  SelectedItem="{Binding WybranaUsterka.Mechanik}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Imie"/>
+                                <Binding Path="Nazwisko"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         
         <Label Grid.Row="2" Content="Opis:"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding WybranaUsterka.Opis}"/>

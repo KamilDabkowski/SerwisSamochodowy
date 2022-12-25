@@ -82,7 +82,7 @@ namespace SerwisSamochodowy.ViewModel
 
         private void OtworzOknoSzczegolow(ObservableCollection<Czesc> czesci = null, Usterka wybranaUsterka = null)
         {
-            var szczegolyViewModel = new SzczegolyUsterkiViewModel(czesci, wybranaUsterka);
+            var szczegolyViewModel = new SzczegolyUsterkiViewModel(WybraneZlecenie.IdZlecenie, czesci, wybranaUsterka);
 
             var szczegolyWindow = new SzczegolyUsterkiWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();

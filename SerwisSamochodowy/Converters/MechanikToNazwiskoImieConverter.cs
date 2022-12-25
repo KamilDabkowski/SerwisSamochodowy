@@ -14,7 +14,7 @@ namespace SerwisSamochodowy.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value).GetType() == typeof(Mechanik))
+            if (value != null && (value).GetType() == typeof(Mechanik))
                 return (value as Mechanik).Nazwisko + " " + (value as Mechanik).Imie;
 
             return string.Empty;
