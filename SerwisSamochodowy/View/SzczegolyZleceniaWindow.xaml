@@ -99,7 +99,7 @@
         <Label Grid.Row="9" Grid.Column="0" Content="Usterki:"/>
         <DataGrid x:Name="dgZlecenia" SelectedItem="{Binding WybranaUsterka, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="10" Grid.ColumnSpan="4" CanUserAddRows="False"
-                  ItemsSource="{Binding WybraneZlecenie.Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Usterki, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
             <DataGrid.Columns>

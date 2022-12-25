@@ -52,10 +52,23 @@ namespace SerwisSamochodowy.ViewModel
         }
 
         public Samochod WybranySamochod { get; set; }
-        public ZlecenieNaprawy WybraneZlecenie { get; set; }
+
+        private ZlecenieNaprawy _wybraneZlecenie;
+
+        public ZlecenieNaprawy WybraneZlecenie
+        {
+            get { return _wybraneZlecenie; }
+            set
+            {
+                _wybraneZlecenie = value;
+                WczytajUsterki();
+            }
+        }
+
+        public ObservableCollection<Usterka> Usterki { get; set; }
         public Usterka WybranaUsterka { get; set; }
 
-        ObservableCollection<Czesc> Czesci { get; set; }
+        public ObservableCollection<Czesc> Czesci { get; set; }
 
         #endregion
 
@@ -63,6 +76,7 @@ namespace SerwisSamochodowy.ViewModel
 
         public SzczegolyZleceniaViewModel()
         {
+            Usterki = new ObservableCollection<Usterka>();
             Czesci = new ObservableCollection<Czesc>();
         }
         public SzczegolyZleceniaViewModel(ZlecenieNaprawy zlecenieNaprawy) : this()
@@ -124,6 +138,12 @@ namespace SerwisSamochodowy.ViewModel
                 BazaDanych.ZleceniaNaprawy[index] = WybraneZlecenie;
             }
             ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
+        }
+
+        private void WczytajUsterki()
+        {
+            Usterki = new ObservableCollection<Usterka>(BazaDanych.Usterki.Where(u => u.IdZlecenieNaprawy == WybraneZlecenie.IdZlecenie));
+            OnPropertyChanged(nameof(Usterki));
         }
 
         #endregion

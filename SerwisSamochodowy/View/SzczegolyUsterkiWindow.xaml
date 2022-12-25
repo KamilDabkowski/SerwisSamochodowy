@@ -51,7 +51,7 @@
         <Label Grid.Row="1" Content="Mechanik:"/>
         <ComboBox Grid.Row="1" Grid.Column="1"
                   ItemsSource="{Binding Mechanicy}"
-                  SelectedItem="{Binding WybranaUsterka.Mechanik}">
+                  SelectedItem="{Binding WybranyMechanik}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -78,7 +78,8 @@
         <Label Grid.Row="5" Content="Naprawione:"/>
         <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding WybranaUsterka.Naprawione}"/>
 
-        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Zapisz"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"
+                Width="120" Content="Zapisz" Command="{Binding Zapisz}"/>
 
         <!--część-->
         <Label Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Część:"/>
