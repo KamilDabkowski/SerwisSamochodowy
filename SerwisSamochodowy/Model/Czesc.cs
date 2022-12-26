@@ -53,6 +53,20 @@ namespace SerwisSamochodowy.Model
             return result;
         }
 
+        public ObservableCollection<Czesc> WczytajCzesciZlecenia(int idZlecenia)
+        {
+            var czesci = new ObservableCollection<Czesc>();
+            var usterki = new Usterka().WczytajUsterki(idZlecenia);
+            foreach (var usterka in usterki)
+            {
+                var czesciUsterki = new ObservableCollection<Czesc>(new Czesc().WczytajCzesci(usterka.IdUsterka));
+                foreach (var czesc in czesciUsterki)
+                    czesci.Add(czesc);
+            }
+
+            return czesci;
+        }
+
         #endregion
     }
 }

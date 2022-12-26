@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,25 @@ namespace SerwisSamochodowy.Model
 
         #region methods
 
-        void ZglosZakonczenieNapraw()
+        public void ZapiszZlecenie()
         {
-            throw new NotImplementedException();
-        }
+            if (IdZlecenie < 1)
+            {
+                int id = 0;
+                var ostatnie = BazaDanych.ZleceniaNaprawy.LastOrDefault();
+                if (ostatnie != null)
+                    id = ostatnie.IdZlecenie;
 
-        void WydajSamochod()
-        {
-            throw new NotImplementedException();
+                IdZlecenie = ++id;
+                BazaDanych.ZleceniaNaprawy.Add(this);
+            }
+            else
+            {
+                var zastepowaneZlecenie = BazaDanych.ZleceniaNaprawy.FirstOrDefault(w => w.IdZlecenie == IdZlecenie);
+                var index = BazaDanych.ZleceniaNaprawy.IndexOf(zastepowaneZlecenie);
+                BazaDanych.ZleceniaNaprawy[index] = this;
+            }
+            ObslugaJSON<ZlecenieNaprawy>.ZapiszDoJSON(BazaDanych.ZleceniaNaprawy, Staticks.PlikZlecenNaprawy);
         }
 
         #endregion

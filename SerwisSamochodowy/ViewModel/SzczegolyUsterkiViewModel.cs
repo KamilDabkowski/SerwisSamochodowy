@@ -77,8 +77,8 @@ namespace SerwisSamochodowy.ViewModel
 
         private void WczytajMechanikow()
         {
-            Mechanicy = BazaDanych.Mechanicy;
-            WybranyMechanik = Mechanicy.FirstOrDefault(m => m.IdMechanik == WybranaUsterka.IdMechanik);
+            Mechanicy = WybranyMechanik.WczytajMechanikow();
+            WybranyMechanik = WybranyMechanik.WyszukajMechanika(WybranaUsterka.IdMechanik);
             OnPropertyChanged(nameof(Mechanicy), nameof(WybranyMechanik));
         }
 
@@ -117,6 +117,7 @@ namespace SerwisSamochodowy.ViewModel
                     _zapisz = new RelayCommand(
                      (object argument) =>
                      {
+                         WybranaUsterka.IdZlecenieNaprawy = _idZlecenie;
                          WybranaUsterka.ZapiszUsterke();
                      },
                      (object argument) =>
@@ -139,6 +140,7 @@ namespace SerwisSamochodowy.ViewModel
                      {
                          WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
                          WybranaCzesc.ZapiszCzesc();
+                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>
@@ -162,6 +164,7 @@ namespace SerwisSamochodowy.ViewModel
                          WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
                          Czesci.Add(WybranaCzesc);
                          WybranaCzesc.ZapiszCzesc();
+                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>

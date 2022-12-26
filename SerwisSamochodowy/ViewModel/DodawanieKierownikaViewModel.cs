@@ -36,8 +36,7 @@ namespace SerwisSamochodowy.ViewModel
         public DodawanieKierownikaViewModel()
         {
             WybranyKierownik = new Kierownik();
-
-            Kierownicy = BazaDanych.Kierownicy;
+            Kierownicy = WybranyKierownik.WczytajDane();
         }
 
         #endregion

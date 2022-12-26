@@ -19,5 +19,7 @@ namespace SerwisSamochodowy.Model
             this.NumerTelefonu = numerTelefonu;
         }
 
+
+
     }
 }

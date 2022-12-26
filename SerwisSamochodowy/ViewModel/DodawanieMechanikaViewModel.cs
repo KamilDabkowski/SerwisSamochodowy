@@ -37,7 +37,7 @@ namespace SerwisSamochodowy.ViewModel
         {
             WybranyMechanik = new Mechanik();
 
-            Mechanicy = BazaDanych.Mechanicy;
+            Mechanicy = WybranyMechanik.WczytajMechanikow();
         }
 
         #endregion

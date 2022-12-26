@@ -1,4 +1,5 @@
-﻿using SerwisSamochodowy.Model.Helpers;
+﻿using SerwisSamochodowy.Common;
+using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,12 @@ namespace SerwisSamochodowy.Model
         {
             this.IdSamochod = idSamochod;
             this.NumerRejestracyjny = numerRejestracyjny;
+        }
+
+        public void ZapiszSamochod()
+        {
+            BazaDanych.Samochody.Add(this);
+            ObslugaJSON<Samochod>.ZapiszDoJSON(BazaDanych.Samochody, Staticks.PlikSamochodow);
         }
     }
 }

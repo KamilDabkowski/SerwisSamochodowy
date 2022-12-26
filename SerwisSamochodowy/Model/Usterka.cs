@@ -3,6 +3,7 @@ using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,19 +47,9 @@ namespace SerwisSamochodowy.Model
             ObslugaJSON<Usterka>.ZapiszDoJSON(BazaDanych.Usterki, Staticks.PlikUsterek);
         }
 
-        void PrzydzielMechanika(Mechanik mechanik)
+        public ObservableCollection<Usterka> WczytajUsterki(int idZlecenie)
         {
-            throw new NotImplementedException();
-        }
-
-        void NaprawUsterke()
-        {
-            throw new NotImplementedException();
-        }
-
-        bool PrzypiszCzesci()
-        {
-            throw new NotImplementedException();
+            return new ObservableCollection<Usterka>(BazaDanych.Usterki.Where(u => u.IdZlecenieNaprawy == idZlecenie));
         }
 
         #endregion
