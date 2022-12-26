@@ -43,6 +43,7 @@
             <RowDefinition Height="28"/>
             <RowDefinition Height="28"/>
             <RowDefinition Height="28"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <!--usterka-->
@@ -103,22 +104,24 @@
         <CheckBox Grid.Row="6" Grid.Column="4" IsChecked="{Binding WybranaCzesc.Wymienione}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2">
-        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Dodaj"/>
-        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" Content="Zapisz" Margin="10,0,0,0"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" 
+                Content="Dodaj" Command="{Binding DodajCzesci}"/>
+        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" 
+                Content="Zapisz" Command="{Binding ZapiszCzesci}" Margin="10,0,0,0"/>
         </StackPanel>
 
         <DataGrid x:Name="dgCzesci" SelectedItem="{Binding WybranaCzesc, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="8" Grid.ColumnSpan="5" CanUserAddRows="False"
-                  ItemsSource="{Binding WybranaUsterka.Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  Grid.Row="8" Grid.RowSpan="3" Grid.ColumnSpan="5" CanUserAddRows="False"
+                  ItemsSource="{Binding Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Width="4*" Binding="{Binding Nazwa}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Numer}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Cena" Width="*" Binding="{Binding Cena}" IsReadOnly="False"/>
-                <DataGridTextColumn Header="Zam." Width="*" Binding="{Binding Zamowione}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Dostarczone}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Wymienione}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Numer}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Cena}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zam." Width="*" Binding="{Binding Zamowione}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Dostarczone}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Wymienione}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

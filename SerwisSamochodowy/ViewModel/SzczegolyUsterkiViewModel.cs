@@ -38,7 +38,19 @@ namespace SerwisSamochodowy.ViewModel
         }
 
         public Usterka WybranaUsterka { get; set; }
-        public Czesc WybranaCzesc { get; set; }
+
+        private Czesc _wybranaCzesc;
+
+        public Czesc WybranaCzesc
+        {
+            get { return _wybranaCzesc; }
+            set
+            {
+                _wybranaCzesc = value;
+                OnPropertyChanged(nameof(WybranaCzesc));
+            }
+        }
+
         public ObservableCollection<Czesc> Czesci { get; set; }
 
         #endregion
@@ -47,18 +59,15 @@ namespace SerwisSamochodowy.ViewModel
 
         public SzczegolyUsterkiViewModel()
         {
+            WybranaCzesc= new Czesc();
             WybranaUsterka = new Usterka();
             WybranyMechanik = new Mechanik();
             Czesci = new ObservableCollection<Czesc>();
         }
 
-        public SzczegolyUsterkiViewModel(int idZlecenie, ObservableCollection<Czesc> czesci = null, Usterka usterka = null)
+        public SzczegolyUsterkiViewModel(int idZlecenie, Usterka usterka = null) :this()
         {
             _idZlecenie = idZlecenie;
-            if (czesci == null)
-                this.Czesci = new ObservableCollection<Czesc>();
-            else
-                this.Czesci = czesci;
 
             if (usterka == null)
                 this.WybranaUsterka = new Usterka();
@@ -71,27 +80,6 @@ namespace SerwisSamochodowy.ViewModel
             Mechanicy = BazaDanych.Mechanicy;
             WybranyMechanik = Mechanicy.FirstOrDefault(m => m.IdMechanik == WybranaUsterka.IdMechanik);
             OnPropertyChanged(nameof(Mechanicy), nameof(WybranyMechanik));
-        }
-
-        private void ZapiszUsterke()
-        {
-            if (WybranaUsterka.IdUsterka < 1)
-            {
-                int id = 0;
-                var ostatnie = BazaDanych.Usterki.LastOrDefault();
-                if (ostatnie != null)
-                    id = ostatnie.IdUsterka;
-
-                WybranaUsterka.IdUsterka = ++id;
-                BazaDanych.Usterki.Add(WybranaUsterka);
-            }
-            else
-            {
-                var zastepowaneZlecenie = BazaDanych.Usterki.FirstOrDefault(w => w.IdUsterka == WybranaUsterka.IdUsterka);
-                var index = BazaDanych.Usterki.IndexOf(zastepowaneZlecenie);
-                BazaDanych.Usterki[index] = WybranaUsterka;
-            }
-            ObslugaJSON<Usterka>.ZapiszDoJSON(BazaDanych.Usterki, Staticks.PlikUsterek);
         }
 
         #endregion
@@ -108,6 +96,8 @@ namespace SerwisSamochodowy.ViewModel
                      (object argument) =>
                      {
                          WczytajMechanikow();
+                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         OnPropertyChanged(nameof(Czesci));
                      },
                      (object argument) =>
                      {
@@ -127,7 +117,7 @@ namespace SerwisSamochodowy.ViewModel
                     _zapisz = new RelayCommand(
                      (object argument) =>
                      {
-                         ZapiszUsterke();
+                         WybranaUsterka.ZapiszUsterke();
                      },
                      (object argument) =>
                      {
@@ -137,6 +127,52 @@ namespace SerwisSamochodowy.ViewModel
                 return _zapisz;
             }
         }
+
+        private ICommand _zapiszCzesci;
+        public ICommand ZapiszCzesci
+        {
+            get
+            {
+                if (_zapiszCzesci == null)
+                    _zapiszCzesci = new RelayCommand(
+                     (object argument) =>
+                     {
+                         WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
+                         WybranaCzesc.ZapiszCzesc();
+                         OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _zapiszCzesci;
+            }
+        }
+
+        private ICommand _dodajCzesci;
+        public ICommand DodajCzesci
+        {
+            get
+            {
+                if (_dodajCzesci == null)
+                    _dodajCzesci = new RelayCommand(
+                     (object argument) =>
+                     {
+                         WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
+                         Czesci.Add(WybranaCzesc);
+                         WybranaCzesc.ZapiszCzesc();
+                         OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _dodajCzesci;
+            }
+        }
+
         #endregion
     }
 }

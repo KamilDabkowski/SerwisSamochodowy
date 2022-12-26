@@ -103,12 +103,11 @@
                   HorizontalAlignment="Left" SelectionMode="Extended" >
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Mechanik" Width="2*" Binding="{Binding Mechanik, Converter={StaticResource mechanikToNazwiskoImieConverter} }" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Opis" Width="4*" Binding="{Binding Opis}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Naprawa" Width="*" Binding="{Binding Naprawa}" IsReadOnly="False"/>
-                <DataGridTextColumn Header="Koszt" Width="*" Binding="{Binding Koszt}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding Naprawione}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Zgłoszone" Width="*" Binding="{Binding ZgloszoneZakonczenieNapraw}" IsReadOnly="False"/>
+                <!--<DataGridTextColumn Header="Mechanik" Width="2*" Binding="{Binding Mechanik, Converter={StaticResource mechanikToNazwiskoImieConverter} }" IsReadOnly="True"/>-->
+                <DataGridTextColumn Header="Opis" Width="4*" Binding="{Binding Opis}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Naprawa" Width="*" Binding="{Binding Naprawa}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Koszt" Width="*" Binding="{Binding Koszt}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Naprawione" Width="*" Binding="{Binding Naprawione}" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -116,17 +115,18 @@
 
         <!--części-->
         <Label Grid.Row="9" Grid.Column="5" Content="Lista części:"/>
-        <DataGrid x:Name="dgCzesci" SelectedItem="{Binding WybranaUsterka.Czesci, UpdateSourceTrigger=PropertyChanged}"
+        <DataGrid x:Name="dgCzesci"
                   Grid.Row="10" Grid.Column="5" CanUserAddRows="False"
-                  ItemsSource="{Binding WybranaUsterka.Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Czesci, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
                   HorizontalAlignment="Left" SelectionMode="Extended" Margin="10,0,0,0">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa" Width="4*" Binding="{Binding Mechanik, Converter={StaticResource mechanikToNazwiskoImieConverter} }" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Opis}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Zam." Width="*" Binding="{Binding Naprawa}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Koszt}" IsReadOnly="False"/>
-                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Naprawione}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Nazwa" Width="4*" Binding="{Binding Nazwa}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Numer" Width="4*" Binding="{Binding Numer}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Cena}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Zam." Width="*" Binding="{Binding Zamowione}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Dost." Width="*" Binding="{Binding Dostarczone}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Wym." Width="*" Binding="{Binding Wymienione}" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>

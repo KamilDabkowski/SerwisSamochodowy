@@ -45,7 +45,7 @@ namespace SerwisSamochodowy.ViewModel
                 if (WybranySamochod == null || WybranySamochod.NumerRejestracyjny == null)
                 {
                     WybranySamochod = new SamochodConstructor(NumerRejestracyjny).ZnajdzSamochod();
-                    WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, WybranySamochod.IdSamochod, new List<Usterka>());
+                    WybraneZlecenie = new ZlecenieNaprawy(_idKlienta, WybranySamochod.IdSamochod);
                 }
                 OnPropertyChanged(nameof(WybranySamochod), nameof(NumerRejestracyjny), nameof(WybraneZlecenie));
             }
@@ -87,6 +87,7 @@ namespace SerwisSamochodowy.ViewModel
                 NumerTelefonuKlienta = BazaDanych.Klienci.FirstOrDefault(k => k.IdKlient == zlecenieNaprawy.IdKlient).NumerTelefonu;
                 WybranySamochod = BazaDanych.Samochody.FirstOrDefault(s=>s.IdSamochod == WybraneZlecenie.IdSamochod);
                 NumerRejestracyjny = WybranySamochod.NumerRejestracyjny;
+
             }
         }
 
@@ -96,12 +97,14 @@ namespace SerwisSamochodowy.ViewModel
 
         private void OtworzOknoSzczegolow(ObservableCollection<Czesc> czesci = null, Usterka wybranaUsterka = null)
         {
-            var szczegolyViewModel = new SzczegolyUsterkiViewModel(WybraneZlecenie.IdZlecenie, czesci, wybranaUsterka);
+            var szczegolyViewModel = new SzczegolyUsterkiViewModel(WybraneZlecenie.IdZlecenie, wybranaUsterka);
 
             var szczegolyWindow = new SzczegolyUsterkiWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
 
-            OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka), nameof(Czesci));
+            WczytajCzesci();
+
+            OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka));
         }
 
         private void ZapiszDane()
@@ -146,6 +149,18 @@ namespace SerwisSamochodowy.ViewModel
             OnPropertyChanged(nameof(Usterki));
         }
 
+        private void WczytajCzesci()
+        {
+            Czesci = new ObservableCollection<Czesc>();
+            foreach (var usterka in Usterki)
+            {
+                var czesciUsterki = new ObservableCollection<Czesc>(new Czesc().WczytajCzesci(usterka.IdUsterka));
+                foreach(var czesc in czesciUsterki)
+                    Czesci.Add(czesc);
+            }
+            OnPropertyChanged(nameof(Czesci));
+        }
+
         #endregion
 
         #region commands
@@ -159,6 +174,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
+                         WczytajCzesci();
                          OnPropertyChanged(nameof(WybraneZlecenie));
                      },
                      (object argument) =>

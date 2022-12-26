@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SerwisSamochodowy.Common;
 using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,27 @@ namespace SerwisSamochodowy.Model
         #endregion
 
         #region methods
+
+        public void ZapiszUsterke()
+        {
+            if (IdUsterka < 1)
+            {
+                int id = 0;
+                var ostatnie = BazaDanych.Usterki.LastOrDefault();
+                if (ostatnie != null)
+                    id = ostatnie.IdUsterka;
+
+                IdUsterka = ++id;
+                BazaDanych.Usterki.Add(this);
+            }
+            else
+            {
+                var zastepowane = BazaDanych.Usterki.FirstOrDefault(w => w.IdUsterka == IdUsterka);
+                var index = BazaDanych.Usterki.IndexOf(zastepowane);
+                BazaDanych.Usterki[index] = this;
+            }
+            ObslugaJSON<Usterka>.ZapiszDoJSON(BazaDanych.Usterki, Staticks.PlikUsterek);
+        }
 
         void PrzydzielMechanika(Mechanik mechanik)
         {

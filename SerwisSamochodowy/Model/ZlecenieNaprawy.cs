@@ -22,20 +22,17 @@ namespace SerwisSamochodowy.Model
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
         [JsonIgnore]
-        public List<Usterka> Usterki { get; set; }
-        [JsonIgnore]
         public Faktura Faktura { get; set; }
 
         #endregion
 
         #region ctor
 
-        public ZlecenieNaprawy(int idKlienta, int idSamochod, List<Usterka> usterki)
+        public ZlecenieNaprawy(int idKlienta, int idSamochod)
         {
             DataPrzyjecia = DateTime.Now.Date;
             this.IdKlient = idKlienta;
             this.IdSamochod = idSamochod;
-            this.Usterki = usterki;
         }
 
         #endregion
