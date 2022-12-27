@@ -22,8 +22,6 @@ namespace SerwisSamochodowy.Model
         public DateTime DataOdbioru { get; set; }
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
-        [JsonIgnore]
-        public Faktura Faktura { get; set; }
 
         #endregion
 

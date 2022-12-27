@@ -69,6 +69,7 @@ namespace SerwisSamochodowy.ViewModel
         public Usterka WybranaUsterka { get; set; }
 
         public ObservableCollection<Czesc> Czesci { get; set; }
+        public Faktura WystawionaFaktura { get; set; }
 
         #endregion
 
@@ -137,8 +138,11 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
-                         OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci));
+                         if (WybraneZlecenie != null)
+                         {
+                             Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
+                             OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci));
+                         }
                      },
                      (object argument) =>
                      {
@@ -209,6 +213,26 @@ namespace SerwisSamochodowy.ViewModel
             }
         }
 
+        private ICommand _wystawFakture;
+        public ICommand WystawFakture
+        {
+            get
+            {
+                if (_wystawFakture == null)
+                    _wystawFakture = new RelayCommand(
+                     (object argument) =>
+                     {
+                         WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
+                         OnPropertyChanged(nameof(WystawionaFaktura));
+                     },
+                     (object argument) =>
+                     {
+                         return true;
+                     }
+                    );
+                return _wystawFakture;
+            }
+        }
         #endregion
 
     }

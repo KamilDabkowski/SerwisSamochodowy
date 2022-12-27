@@ -91,9 +91,9 @@
         <Label Grid.Row="6" Grid.Column="3"  Content="Data odbioru:"/>
         <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding WybraneZlecenie.DataOdbioru, StringFormat=yyyy-MM-dd}" IsEnabled="False"/>
         <Label Grid.Row="7" Grid.Column="3"  Content="Faktura:"/>
-        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WybraneZlecenie.Faktura.Numer}"
-                 IsEnabled="{Binding WybranySamochod, Converter={StaticResource objectToBoolConverter}}"/>
-        <Button Grid.Row="8" Grid.Column="3"  Content="Utwórz fakturę"/>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WystawionaFaktura.Numer, Mode=OneWay}"
+                 IsEnabled="False"/>
+        <Button Grid.Row="8" Grid.Column="3"  Content="Wystaw fakturę" Command="{Binding WystawFakture}"/>
 
         <!--usterki-->
         <Label Grid.Row="9" Grid.Column="0" Content="Usterki:"/>
