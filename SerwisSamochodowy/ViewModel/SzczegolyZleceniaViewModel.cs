@@ -225,8 +225,10 @@ namespace SerwisSamochodowy.ViewModel
                      {
                          if (WystawionaFaktura == null)
                          {
+                             WybraneZlecenie.DataOdbioru = DateTime.Now.Date;
+                             WybraneZlecenie.ZapiszZlecenie();
                              WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
-                             OnPropertyChanged(nameof(WystawionaFaktura));
+                             OnPropertyChanged(nameof(WystawionaFaktura), nameof(WybraneZlecenie));
                          }
                      },
                      (object argument) =>
