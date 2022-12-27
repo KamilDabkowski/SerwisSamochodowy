@@ -141,7 +141,7 @@ namespace SerwisSamochodowy.ViewModel
                          if (WybraneZlecenie != null)
                          {
                              Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
-                             WystawionaFaktura = FakturaConstructor.WczytajFakture(WybraneZlecenie.IdZlecenie);
+                             WystawionaFaktura = Faktura.WczytajFakture(WybraneZlecenie.IdZlecenie);
                              OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci), nameof(WystawionaFaktura));
                          }
                      },
@@ -223,22 +223,47 @@ namespace SerwisSamochodowy.ViewModel
                     _wystawFakture = new RelayCommand(
                      (object argument) =>
                      {
-                         if (WystawionaFaktura == null)
-                         {
-                             WybraneZlecenie.DataOdbioru = DateTime.Now.Date;
-                             WybraneZlecenie.ZapiszZlecenie();
-                             WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
-                             OnPropertyChanged(nameof(WystawionaFaktura), nameof(WybraneZlecenie));
-                         }
+                         WybraneZlecenie.DataOdbioru = DateTime.Now.Date;
+                         WybraneZlecenie.ZapiszZlecenie();
+                         WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
+                         OnPropertyChanged(nameof(WystawionaFaktura), nameof(WybraneZlecenie));
                      },
                      (object argument) =>
                      {
-                         return true;
+                         if (WystawionaFaktura == null)
+                             return true;
+                         else
+                             return false;
                      }
                     );
                 return _wystawFakture;
             }
         }
+
+        private ICommand _otworzFakture;
+        public ICommand OtworzFakture
+        {
+            get
+            {
+                if (_otworzFakture == null)
+                    _otworzFakture = new RelayCommand(
+                     (object argument) =>
+                     {
+                         WystawionaFaktura.OtworzFakture();
+
+                     },
+                     (object argument) =>
+                     {
+                         if (WystawionaFaktura != null)
+                             return true;
+                         else
+                             return true;
+                     }
+                    );
+                return _otworzFakture;
+            }
+        }
+
         #endregion
 
     }

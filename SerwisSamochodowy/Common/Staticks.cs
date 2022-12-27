@@ -18,5 +18,8 @@ namespace SerwisSamochodowy.Common
         public const string PlikSamochodow = FolderDanych + "Samochody.json";
         public const string PlikUsterek = FolderDanych + "Usterki.json";
         public const string PlikZlecenNaprawy = FolderDanych + "ZleceniaNaprawy.json";
+
+        public const string FolderFaktur = "faktury\\";
+
     }
 }

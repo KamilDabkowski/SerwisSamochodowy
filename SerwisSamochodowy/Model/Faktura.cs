@@ -3,9 +3,12 @@ using SerwisSamochodowy.Model.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace SerwisSamochodowy.Model
 {
@@ -39,19 +42,40 @@ namespace SerwisSamochodowy.Model
 
         #region methods
 
-
-
-        private void WygenerujPlik()
+        public static Faktura WczytajFakture(int idZlecenieNaprawy)
         {
-
+            var result = BazaDanych.Faktury.FirstOrDefault(f => f.IdZlecenia == idZlecenieNaprawy);
+            return result;
         }
 
-        public Faktura WczytajFakture()
+        public void OtworzFakture()
         {
-            throw new NotImplementedException();
-        }
+            string result = string.Empty;
+            result += "Data wystawienia: \r\n" + DataWystawienia + "\r\n";
+            result += "Numer: \r\n" + Numer + "\r\n";
+            result += "Data wystawienia: \r\n" + DataWystawienia + "\r\n";
 
-        
+            int licznik = 1;
+            foreach(var koszt in Koszty)
+            {
+                result += licznik + " " + koszt.Key + ": " + koszt.Value + "\r\n";
+                licznik++;
+            }
+
+            result += "Suma: \r\n" + Suma + "\r\n";
+
+            if (!Directory.Exists(Staticks.FolderFaktur))
+                Directory.CreateDirectory(Staticks.FolderFaktur);
+
+            var fileName = IdFaktura + ".txt";
+            File.WriteAllText(Staticks.FolderFaktur + "\\" + fileName , result);
+
+            using (Process fileopener = new Process())
+            {
+                fileopener.StartInfo.FileName = Staticks.FolderFaktur + "\\" + fileName;
+                fileopener.Start();
+            }
+        }
 
         #endregion
 
