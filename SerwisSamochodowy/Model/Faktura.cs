@@ -14,7 +14,7 @@ namespace SerwisSamochodowy.Model
         #region properties
 
         public int IdFaktura { get; private set; }
-        public int IdZlecenieNaprawy { get; private set; }
+        public int IdZlecenia { get; private set; }
         public DateTime DataWystawienia { get; private set; }
         public int Numer { get; private set; }
 
@@ -28,7 +28,7 @@ namespace SerwisSamochodowy.Model
         public Faktura(int idFaktura, int idZlecenia, DateTime dataWystawienia, int numer, Dictionary<string, float> koszty, float suma)
         {
             this.IdFaktura = idFaktura;
-            this.IdZlecenieNaprawy = idZlecenia;
+            this.IdZlecenia = idZlecenia;
             this.DataWystawienia = dataWystawienia;
             this.Numer = numer;
             this.Koszty = koszty;

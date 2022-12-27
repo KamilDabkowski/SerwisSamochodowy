@@ -141,7 +141,8 @@ namespace SerwisSamochodowy.ViewModel
                          if (WybraneZlecenie != null)
                          {
                              Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
-                             OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci));
+                             WystawionaFaktura = FakturaConstructor.WczytajFakture(WybraneZlecenie.IdZlecenie);
+                             OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci), nameof(WystawionaFaktura));
                          }
                      },
                      (object argument) =>
@@ -222,8 +223,11 @@ namespace SerwisSamochodowy.ViewModel
                     _wystawFakture = new RelayCommand(
                      (object argument) =>
                      {
-                         WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
-                         OnPropertyChanged(nameof(WystawionaFaktura));
+                         if (WystawionaFaktura == null)
+                         {
+                             WystawionaFaktura = FakturaConstructor.WystawFakture(WybraneZlecenie.IdZlecenie);
+                             OnPropertyChanged(nameof(WystawionaFaktura));
+                         }
                      },
                      (object argument) =>
                      {

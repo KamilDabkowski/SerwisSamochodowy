@@ -9,6 +9,11 @@ namespace SerwisSamochodowy.Model.Helpers
 {
     internal static class FakturaConstructor
     {
+        public static Faktura WczytajFakture(int idZlecenieNaprawy)
+        {
+            var result = BazaDanych.Faktury.FirstOrDefault(f=>f.IdZlecenia == idZlecenieNaprawy);
+            return result;
+        }
         public static Faktura WystawFakture(int idZlecenieNaprawy)
         {
             var dataWystawienia = DateTime.Now.Date;
