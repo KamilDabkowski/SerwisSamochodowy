@@ -141,6 +141,7 @@ namespace SerwisSamochodowy.ViewModel
                          WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
                          WybranaCzesc.ZapiszCzesc();
                          Czesci = Czesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         WybranaCzesc = new Czesc();
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>
@@ -165,6 +166,7 @@ namespace SerwisSamochodowy.ViewModel
                          Czesci.Add(WybranaCzesc);
                          WybranaCzesc.ZapiszCzesc();
                          Czesci = Czesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         WybranaCzesc = new Czesc();
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>
