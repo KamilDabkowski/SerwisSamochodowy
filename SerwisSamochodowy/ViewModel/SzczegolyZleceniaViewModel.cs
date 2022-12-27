@@ -107,7 +107,7 @@ namespace SerwisSamochodowy.ViewModel
             Usterki = Usterka.WczytajUsterki(WybraneZlecenie.IdZlecenie);
             Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
 
-            OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka), nameof(Czesci));
+            OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka), nameof(Usterki), nameof(Czesci));
         }
 
         private void ZapiszDane()
