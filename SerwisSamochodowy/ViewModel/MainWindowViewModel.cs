@@ -29,7 +29,7 @@ namespace SerwisSamochodowy.ViewModel
         public MainWindowViewModel()
         {
             BazaDanych.WczytajDaneZPlikow();
-            Zlecenia = new ZlecenieNaprawyWrapper().WczytajZlecenia();
+            Zlecenia = ZlecenieNaprawyWrapper.WczytajZlecenia();
         }
 
         #endregion
@@ -42,7 +42,7 @@ namespace SerwisSamochodowy.ViewModel
             var szczegolyWindow = new SzczegolyZleceniaWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
 
-            Zlecenia = new ZlecenieNaprawyWrapper().WczytajZlecenia();
+            Zlecenia = ZlecenieNaprawyWrapper.WczytajZlecenia();
 
             OnPropertyChanged(nameof(Zlecenia), nameof(WybraneZlecenie));
         }

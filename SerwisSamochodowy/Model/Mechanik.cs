@@ -30,12 +30,12 @@ namespace SerwisSamochodowy.Model
             ObslugaJSON<Mechanik>.ZapiszDoJSON(BazaDanych.Mechanicy, Staticks.PlikMechanikow);
         }
 
-        public ObservableCollection<Mechanik> WczytajMechanikow()
+        public static ObservableCollection<Mechanik> WczytajMechanikow()
         {
             return BazaDanych.Mechanicy;
         }
 
-        public Mechanik WyszukajMechanika(int idMechanik)
+        public static Mechanik WyszukajMechanika(int idMechanik)
         {
             return BazaDanych.Mechanicy.FirstOrDefault(m => m.IdMechanik == idMechanik);
         }

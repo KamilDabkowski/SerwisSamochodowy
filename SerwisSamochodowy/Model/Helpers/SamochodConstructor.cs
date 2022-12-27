@@ -9,7 +9,7 @@ namespace SerwisSamochodowy.Model.Helpers
 {
     internal class SamochodConstructor
     {
-        private string _numerRejestracyjny;
+        private readonly string _numerRejestracyjny;
         public SamochodConstructor(string numerRejestracyjny)
         {
             this._numerRejestracyjny = numerRejestracyjny;

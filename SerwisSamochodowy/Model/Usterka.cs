@@ -47,7 +47,7 @@ namespace SerwisSamochodowy.Model
             ObslugaJSON<Usterka>.ZapiszDoJSON(BazaDanych.Usterki, Staticks.PlikUsterek);
         }
 
-        public ObservableCollection<Usterka> WczytajUsterki(int idZlecenie)
+        public static ObservableCollection<Usterka> WczytajUsterki(int idZlecenie)
         {
             return new ObservableCollection<Usterka>(BazaDanych.Usterki.Where(u => u.IdZlecenieNaprawy == idZlecenie));
         }

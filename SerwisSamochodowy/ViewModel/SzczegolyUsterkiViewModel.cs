@@ -77,8 +77,8 @@ namespace SerwisSamochodowy.ViewModel
 
         private void WczytajMechanikow()
         {
-            Mechanicy = WybranyMechanik.WczytajMechanikow();
-            WybranyMechanik = WybranyMechanik.WyszukajMechanika(WybranaUsterka.IdMechanik);
+            Mechanicy = Mechanik.WczytajMechanikow();
+            WybranyMechanik = Mechanik.WyszukajMechanika(WybranaUsterka.IdMechanik);
             OnPropertyChanged(nameof(Mechanicy), nameof(WybranyMechanik));
         }
 
@@ -96,7 +96,7 @@ namespace SerwisSamochodowy.ViewModel
                      (object argument) =>
                      {
                          WczytajMechanikow();
-                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         Czesci = Czesc.WczytajCzesci(WybranaUsterka.IdUsterka);
                          OnPropertyChanged(nameof(Czesci));
                      },
                      (object argument) =>
@@ -140,7 +140,7 @@ namespace SerwisSamochodowy.ViewModel
                      {
                          WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
                          WybranaCzesc.ZapiszCzesc();
-                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         Czesci = Czesc.WczytajCzesci(WybranaUsterka.IdUsterka);
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>
@@ -164,7 +164,7 @@ namespace SerwisSamochodowy.ViewModel
                          WybranaCzesc.IdUsterka = WybranaUsterka.IdUsterka;
                          Czesci.Add(WybranaCzesc);
                          WybranaCzesc.ZapiszCzesc();
-                         Czesci = WybranaCzesc.WczytajCzesci(WybranaUsterka.IdUsterka);
+                         Czesci = Czesc.WczytajCzesci(WybranaUsterka.IdUsterka);
                          OnPropertyChanged(nameof(Czesci), nameof(WybranaCzesc));
                      },
                      (object argument) =>

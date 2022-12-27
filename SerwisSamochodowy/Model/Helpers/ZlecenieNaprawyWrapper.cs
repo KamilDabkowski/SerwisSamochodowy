@@ -13,7 +13,7 @@ namespace SerwisSamochodowy.Model.Helpers
         public ZlecenieNaprawy ZlecenieNaprawy { get; set; }
         public Samochod Samochod { get; set; }
 
-        public ObservableCollection<ZlecenieNaprawyWrapper> WczytajZlecenia()
+        public static ObservableCollection<ZlecenieNaprawyWrapper> WczytajZlecenia()
         {
             var result = new ObservableCollection<ZlecenieNaprawyWrapper>();
 

@@ -96,15 +96,15 @@ namespace SerwisSamochodowy.ViewModel
 
         #region methods
 
-        private void OtworzOknoSzczegolow(ObservableCollection<Czesc> czesci = null, Usterka wybranaUsterka = null)
+        private void OtworzOknoSzczegolow(Usterka wybranaUsterka = null)
         {
             var szczegolyViewModel = new SzczegolyUsterkiViewModel(WybraneZlecenie.IdZlecenie, wybranaUsterka);
 
             var szczegolyWindow = new SzczegolyUsterkiWindow(szczegolyViewModel);
             szczegolyWindow.ShowDialog();
 
-            Usterki = WybranaUsterka.WczytajUsterki(WybraneZlecenie.IdZlecenie);
-            Czesci = new Czesc().WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
+            Usterki = Usterka.WczytajUsterki(WybraneZlecenie.IdZlecenie);
+            Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
 
             OnPropertyChanged(nameof(WybraneZlecenie), nameof(WybranaUsterka), nameof(Czesci));
         }
@@ -120,7 +120,7 @@ namespace SerwisSamochodowy.ViewModel
 
         private void WczytajUsterki()
         {
-            Usterki = WybranaUsterka.WczytajUsterki(WybraneZlecenie.IdZlecenie);
+            Usterki = Usterka.WczytajUsterki(WybraneZlecenie.IdZlecenie);
             OnPropertyChanged(nameof(Usterki));
         }
 
@@ -137,7 +137,7 @@ namespace SerwisSamochodowy.ViewModel
                     _loaded = new RelayCommand(
                      (object argument) =>
                      {
-                         Czesci = new Czesc().WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
+                         Czesci = Czesc.WczytajCzesciZlecenia(WybraneZlecenie.IdZlecenie);
                          OnPropertyChanged(nameof(WybraneZlecenie), nameof(Czesci));
                      },
                      (object argument) =>
@@ -178,7 +178,7 @@ namespace SerwisSamochodowy.ViewModel
                     _dodajNowaUsterke = new RelayCommand(
                      (object argument) =>
                      {
-                         OtworzOknoSzczegolow(Czesci);
+                         OtworzOknoSzczegolow();
                      },
                      (object argument) =>
                      {
@@ -198,7 +198,7 @@ namespace SerwisSamochodowy.ViewModel
                     _szczegolyUsterki = new RelayCommand(
                      (object argument) =>
                      {
-                         OtworzOknoSzczegolow(Czesci, WybranaUsterka);
+                         OtworzOknoSzczegolow(WybranaUsterka);
                      },
                      (object argument) =>
                      {

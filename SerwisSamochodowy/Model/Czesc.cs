@@ -47,19 +47,19 @@ namespace SerwisSamochodowy.Model
             }
             ObslugaJSON<Czesc>.ZapiszDoJSON(BazaDanych.Czesci, Staticks.PlikCzesci);
         }
-        public ObservableCollection<Czesc> WczytajCzesci(int idUsterki)
+        public static ObservableCollection<Czesc> WczytajCzesci(int idUsterki)
         {
             var result = new ObservableCollection<Czesc>(BazaDanych.Czesci.Where(c => c.IdUsterka == idUsterki));
             return result;
         }
 
-        public ObservableCollection<Czesc> WczytajCzesciZlecenia(int idZlecenia)
+        public static ObservableCollection<Czesc> WczytajCzesciZlecenia(int idZlecenia)
         {
             var czesci = new ObservableCollection<Czesc>();
-            var usterki = new Usterka().WczytajUsterki(idZlecenia);
+            var usterki = Usterka.WczytajUsterki(idZlecenia);
             foreach (var usterka in usterki)
             {
-                var czesciUsterki = new ObservableCollection<Czesc>(new Czesc().WczytajCzesci(usterka.IdUsterka));
+                var czesciUsterki = new ObservableCollection<Czesc>(Czesc.WczytajCzesci(usterka.IdUsterka));
                 foreach (var czesc in czesciUsterki)
                     czesci.Add(czesc);
             }
