@@ -13,7 +13,6 @@ namespace SerwisSamochodowy.Common
     {
         public static ObservableCollection<ZlecenieNaprawy> ZleceniaNaprawy;
         public static ObservableCollection<Mechanik> Mechanicy;
-        public static ObservableCollection<Kierownik> Kierownicy;
         public static ObservableCollection<Klient> Klienci;
         public static ObservableCollection<Samochod> Samochody;
         public static ObservableCollection<Usterka> Usterki;
@@ -24,7 +23,6 @@ namespace SerwisSamochodowy.Common
         {
             Czesci = ObslugaJSON<Czesc>.PobierzDaneZJSON(Staticks.PlikCzesci);
             Faktury = ObslugaJSON<Faktura>.PobierzDaneZJSON(Staticks.PlikFaktur);
-            Kierownicy = ObslugaJSON<Kierownik>.PobierzDaneZJSON(Staticks.PlikKierownikow);
             Klienci = ObslugaJSON<Klient>.PobierzDaneZJSON(Staticks.PlikKlientow);
             Mechanicy = ObslugaJSON<Mechanik>.PobierzDaneZJSON(Staticks.PlikMechanikow);
             Samochody = ObslugaJSON<Samochod>.PobierzDaneZJSON(Staticks.PlikSamochodow);

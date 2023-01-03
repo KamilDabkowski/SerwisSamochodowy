@@ -33,7 +33,6 @@
         <Menu FontSize="15">
             <MenuItem Header="Dodaj nowe" Command="{Binding DodajNoweZlecenie}"/>
             <MenuItem Header="Pokaż szczegóły" Command="{Binding SzczegolyZlecenia}"/>
-            <MenuItem Header="Kierownicy" Command="{Binding DodajKierownika}"/>
             <MenuItem Header="Mechanicy" Command="{Binding DodajMechanika}"/>
         </Menu>
 

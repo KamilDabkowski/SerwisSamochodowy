@@ -113,27 +113,6 @@ namespace SerwisSamochodowy.ViewModel
             }
         }
 
-        private ICommand _dodajKierownika;
-        public ICommand DodajKierownika
-        {
-            get
-            {
-                if (_dodajKierownika == null)
-                    _dodajKierownika = new RelayCommand(
-                     (object argument) =>
-                     {
-                         var kierownikWindow = new DodawanieKierownikaWindow();
-                         kierownikWindow.ShowDialog();
-                     },
-                     (object argument) =>
-                     {
-                         return true;
-                     }
-                    );
-                return _dodajKierownika;
-            }
-        }
-
         private ICommand _dodajMechanika;
         public ICommand DodajMechanika
         {
