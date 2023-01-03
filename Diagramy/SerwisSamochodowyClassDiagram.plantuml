@@ -1,0 +1,123 @@
+@startuml
+allowmixing 
+'elementy class można zastąpic przez object
+
+folder Model{
+    class Czesc{
+        «get/set» IdCzesc : int
+        «get/set» IdUsterka : int
+        «get/set» Nazwa : string
+        «get/set» Cena : float
+        «get/set» Numer : string
+        «get/set» Zamowione : bool
+        «get/set» Dostarczone : bool
+        «get/set» Wymienione : bool
+
+        +ZapiszCzesc() : void
+        + {static} WczytajCzesci(int idUsterki) : ObservableCollection<Czesc>
+        {static} WczytajCzesciZlecenia(int idZlecenia) : ObservableCollection<Czesc>
+    }
+
+    class Faktura{
+        «get/private set» IdFaktura : int
+        «get/private set» IdZlecenie : int
+        «get/private set» DataWystawienie : DateTime
+        «get/private set» Numer : int
+        «get/private set» Koszty : Dictionary<string, float>
+        «get/private set» Suma : float
+
+        + {static} WczytajFakture(int idZlecenieNaprawy) : Faktura
+        +OtworzFakture : void
+    }
+
+    class Klient{
+        «get/set» IdKlient : int
+        «get/set» NumerTeleefonu : string
+    }
+
+    class Mechanik{
+        «get/set» IdMechanik : int
+        «get/set» Imie : string
+        «get/set» Nazwisko : string
+
+        +ZapiszDane() : void
+        + {static} WczytajMechanikow() : ObservableCollection<Mechanik>
+        + {static} WyszukajMechanika(int idMechanik) : Mechanik
+    }
+
+    class Samochod{
+        «get/set» IdSamochod : int
+        «get/set» Marka : string
+        «get/set» Model : string
+        «get/set» Silnike : string
+        «get/set» RokProdukcji : int
+        «get/set» NumerRejestracyjny : string
+
+        + ZapiszSamochod() : void
+    }
+    class Usterka{
+        «get/set» IdUsterka : int
+        «get/set» IdZlecenieNaprawy : int
+        «get/set» IdMechanik : int
+        «get/set» Opis : string
+        «get/set» Naprawa : bool
+        «get/set» Naprawione : bool
+        «get/set» Koszt : float
+
+        + ZapiszUsterke() : void
+        + {static} WczytajUsterki(int idZlecenie) : ObservableCollection<Usterka>
+    }
+    class ZlecenieNaprawy{
+        «get/set» IdZlecenie : int
+        «get/set» IdKlient : int
+        «get/set» IdSamochod : int
+        «get/private set» DataPrzyjecia : DateTime
+        «get/set» Naprawione : bool
+        «get/set» ZgloszoneZakonczenieNapraw : bool
+        «get/private set» DataOdbioru : DateTime
+        «get/set» Zaplacone : bool
+        «get/set» Odebrane : bool
+
+        + ZapiszZlecenie() : void
+    }
+
+    folder Helpers{
+        class FakturaConstructor
+        class KlientConstrucktor
+        class SamochodConstructor
+        class UsterkaWrapper
+        class ZlecenieNaprawyWrapper
+    }
+}
+
+folder Common{
+    database BazaDanych{
+    class BazaDanych
+    class ObslugaJSON
+    }
+    class Staticks
+    class RelayCommand
+}
+
+folder Converters{
+    class MechanikToNazwiskoImieConverter
+    class ObjectToBoolConverter
+    class SamochodToNazwaSamochoduConverter
+}
+
+folder View{
+    class DodawanieMechanikaWindow
+    class MainWindow
+    class SzczegolyUsterkiWindow
+    class SzczegolyZleceniaWindow
+}
+
+folder ViewModel{
+    class DodawanieMechanikaViewModel
+    class MainWindowViewModel
+    class SzczegolyUsterkiViewModel
+    class SzczegolyZleceniaViewModel
+    class ViewModelBase
+}
+
+@enduml
