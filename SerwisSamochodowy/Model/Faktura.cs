@@ -17,7 +17,7 @@ namespace SerwisSamochodowy.Model
         #region properties
 
         public int IdFaktura { get; private set; }
-        public int IdZlecenia { get; private set; }
+        public int IdZlecenie { get; private set; }
         public DateTime DataWystawienia { get; private set; }
         public int Numer { get; private set; }
 
@@ -31,7 +31,7 @@ namespace SerwisSamochodowy.Model
         public Faktura(int idFaktura, int idZlecenia, DateTime dataWystawienia, int numer, Dictionary<string, float> koszty, float suma)
         {
             this.IdFaktura = idFaktura;
-            this.IdZlecenia = idZlecenia;
+            this.IdZlecenie = idZlecenia;
             this.DataWystawienia = dataWystawienia;
             this.Numer = numer;
             this.Koszty = koszty;
@@ -44,7 +44,7 @@ namespace SerwisSamochodowy.Model
 
         public static Faktura WczytajFakture(int idZlecenieNaprawy)
         {
-            var result = BazaDanych.Faktury.FirstOrDefault(f => f.IdZlecenia == idZlecenieNaprawy);
+            var result = BazaDanych.Faktury.FirstOrDefault(f => f.IdZlecenie == idZlecenieNaprawy);
             return result;
         }
 

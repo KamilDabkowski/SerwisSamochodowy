@@ -16,10 +16,10 @@ namespace SerwisSamochodowy.Model
         public int IdZlecenie { get; set; }
         public int IdKlient { get; set; }
         public int IdSamochod { get; set; }
-        public DateTime DataPrzyjecia { get; set; }
+        public DateTime DataPrzyjecia { get; private set; }
         public bool Naprawione { get; set; }
         public bool ZgloszoneZakonczenieNapraw { get; set; }
-        public DateTime DataOdbioru { get; set; }
+        public DateTime DataOdbioru { get; private set; }
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
 
