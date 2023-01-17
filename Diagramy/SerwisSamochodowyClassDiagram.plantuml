@@ -4,14 +4,14 @@ allowmixing
 
 folder Model{
     class Czesc{
-        {get/set} IdCzesc : int
-        {get/set} IdUsterka : int
-        {get/set} Nazwa : string
-        {get/set} Cena : float
-        {get/set} Numer : string
-        {get/set} Zamowione : bool
-        {get/set} Dostarczone : bool
-        {get/set} Wymienione : bool
+        + {get/set} IdCzesc : int
+        + {get/set} IdUsterka : int
+        + {get/set} Nazwa : string
+        + {get/set} Cena : float
+        + {get/set} Numer : string
+        + {get/set} Zamowione : bool
+        + {get/set} Dostarczone : bool
+        + {get/set} Wymienione : bool
 
         +ZapiszCzesc() : void
         + {static} WczytajCzesci(int idUsterki) : ObservableCollection<Czesc>
@@ -19,26 +19,26 @@ folder Model{
     }
 
     class Faktura{
-        {get/private set} IdFaktura : int
-        {get/private set} IdZlecenie : int
-        {get/private set} DataWystawienie : DateTime
-        {get/private set} Numer : int
-        {get/private set} Koszty : Dictionary<string, float>
-        {get/private set} Suma : float
+        + {get/private set} IdFaktura : int
+        + {get/private set} IdZlecenie : int
+        + {get/private set} DataWystawienie : DateTime
+        + {get/private set} Numer : int
+        + {get/private set} Koszty : Dictionary<string, float>
+        + {get/private set} Suma : float
 
         + {static} WczytajFakture(int idZlecenieNaprawy) : Faktura
         +OtworzFakture : void
     }
 
     class Klient{
-        {get/set} IdKlient : int
-        {get/set} NumerTeleefonu : string
+        + {get/set} IdKlient : int
+        + {get/set} NumerTeleefonu : string
     }
 
     class Mechanik{
-        {get/set} IdMechanik : int
-        {get/set} Imie : string
-        {get/set} Nazwisko : string
+        + {get/set} IdMechanik : int
+        + {get/set} Imie : string
+        + {get/set} Nazwisko : string
 
         +ZapiszDane() : void
         + {static} WczytajMechanikow() : ObservableCollection<Mechanik>
@@ -46,42 +46,42 @@ folder Model{
     }
 
     class Samochod{
-        {get/set} IdSamochod : int
-        {get/set} Marka : string
-        {get/set} Model : string
-        {get/set} Silnike : string
-        {get/set} RokProdukcji : int
-        {get/set} NumerRejestracyjny : string
+        + {get/set} IdSamochod : int
+        + {get/set} Marka : string
+        + {get/set} Model : string
+        + {get/set} Silnike : string
+        + {get/set} RokProdukcji : int
+        + {get/set} NumerRejestracyjny : string
 
         + ZapiszSamochod() : void
     }
     class Usterka{
-        {get/set} IdUsterka : int
-        {get/set} IdZlecenieNaprawy : int
-        {get/set} IdMechanik : int
-        {get/set} Opis : string
-        {get/set} Naprawa : bool
-        {get/set} Naprawione : bool
-        {get/set} Koszt : float
+        + {get/set} IdUsterka : int
+        + {get/set} IdZlecenieNaprawy : int
+        + {get/set} IdMechanik : int
+        + {get/set} Opis : string
+        + {get/set} Naprawa : bool
+        + {get/set} Naprawione : bool
+        + {get/set} Koszt : float
 
         + ZapiszUsterke() : void
         + {static} WczytajUsterki(int idZlecenie) : ObservableCollection<Usterka>
     }
     class ZlecenieNaprawy{
-        {get/set} IdZlecenie : int
-        {get/set} IdKlient : int
-        {get/set} IdSamochod : int
-        {get/private set} DataPrzyjecia : DateTime
-        {get/set} Naprawione : bool
-        {get/set} ZgloszoneZakonczenieNapraw : bool
-        {get/private set} DataOdbioru : DateTime
-        {get/set} Zaplacone : bool
-        {get/set} Odebrane : bool
+        + {get/set} IdZlecenie : int
+        + {get/set} IdKlient : int
+        + {get/set} IdSamochod : int
+        + {get/private set} DataPrzyjecia : DateTime
+        + {get/set} Naprawione : bool
+        + {get/set} ZgloszoneZakonczenieNapraw : bool
+        + {get/private set} DataOdbioru : DateTime
+        + {get/set} Zaplacone : bool
+        + {get/set} Odebrane : bool
 
         + ZapiszZlecenie() : void
     }
 
-    folder Helpers{
+    ' folder Helpers{
         class FakturaConstructor{
             + WystawFakture(int idZlecenieNaprawy) : Faktura
             - PrzypiszKoszty(int idZlecenieNaprawy) : Dictionary<string, float>
@@ -99,37 +99,37 @@ folder Model{
             - ZdefiniujNowySamochod() : Samochod
         }
         class UsterkaWrapper{
-            {get/set} Mechanik : Mechanik
-            {get/set} Czesci : ObservableCollection<Czesc>
+            + {get/set} Mechanik : Mechanik
+            + {get/set} Czesci : ObservableCollection<Czesc>
         }
         class ZlecenieNaprawyWrapper{
-            {get/set} ZlecenieNaprawy : ZlecenieNaprawy
-            {get/set} Samochod : Samochod
+            + {get/set} ZlecenieNaprawy : ZlecenieNaprawy
+            + {get/set} Samochod : Samochod
             + {static} WczytajZlecenia() : ObservableCollection<ZlecenieNaprawyWrapper>
         }
-    }
+    ' }
 }
 
 folder Common{
     database BazaDanych{
     class BazaDanych{
-        {static} ZleceniaNaprawy : ObservableCollection<ZlecenieNaprawy>
-        {static} Mechanicy : ObservableCollection<Mechanik>
-        {static} Klienci : ObservableCollection<Klient>
-        {static} Samochody : ObservableCollection<Samochod>
-        {static} Usterki : ObservableCollection<Usterka>
-        {static} Faktury : ObservableCollection<Faktura>
-        {static} Czesci : ObservableCollection<Czesc>
-        {static} WczytajDaneZPlikow() : void
+        + {static} ZleceniaNaprawy : ObservableCollection<ZlecenieNaprawy>
+        + {static} Mechanicy : ObservableCollection<Mechanik>
+        + {static} Klienci : ObservableCollection<Klient>
+        + {static} Samochody : ObservableCollection<Samochod>
+        + {static} Usterki : ObservableCollection<Usterka>
+        + {static} Faktury : ObservableCollection<Faktura>
+        + {static} Czesci : ObservableCollection<Czesc>
+        + {static} WczytajDaneZPlikow() : void
     }
     class ObslugaJSON{
-        {static} PobierzDaneZJSON(string nazwaPliku) : ObservableCollection<T>
-        {static} ZapiszDoJSON(IEnumerable<T> listaDanych, string nazwaPliku) : void
+        + {static} PobierzDaneZJSON(string nazwaPliku) : ObservableCollection<T>
+        + {static} ZapiszDoJSON(IEnumerable<T> listaDanych, string nazwaPliku) : void
     }
     }
     class RelayCommand{
-        {readonly} _execute Action<object>
-        {readonly} _canExecute Predicate<object>
+        + {readonly} _execute Action<object>
+        + {readonly} _canExecute Predicate<object>
         + CanExecute(object parameter) : bool
         + EventHandler CanExecuteChanged : event
         + Execute(object parameter) : void
@@ -148,34 +148,121 @@ folder Common{
     }
 }
 
-folder Converters{
-    class MechanikToNazwiskoImieConverter{
-        Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
-        ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
-    }
-    class ObjectToBoolConverter{
-        Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
-        ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
-    }
-    class SamochodToNazwaSamochoduConverter{
-        Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
-        ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
-    }
-}
+' folder Converters{
+'     class MechanikToNazwiskoImieConverter{
+'         + Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
+'         + ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
+'     }
+'     class ObjectToBoolConverter{
+'         + Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
+'         + ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
+'     }
+'     class SamochodToNazwaSamochoduConverter{
+'         + Convert(object value, Type targetType, object parameter, CultureInfo culture) : object
+'         + ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) : object
+'     }
+' }
 
-folder View{
-    class DodawanieMechanikaWindow
-    class MainWindow
-    class SzczegolyUsterkiWindow
-    class SzczegolyZleceniaWindow
-}
+' folder View{
+'     class DodawanieMechanikaWindow
+'     class MainWindow
+'     class SzczegolyUsterkiWindow
+'     class SzczegolyZleceniaWindow
+' }
 
-folder ViewModel{
-    class DodawanieMechanikaViewModel
-    class MainWindowViewModel
-    class SzczegolyUsterkiViewModel
-    class SzczegolyZleceniaViewModel
-    class ViewModelBase
-}
+' folder ViewModel{
+'     class DodawanieMechanikaViewModel{
+'         - _wybranyMechanik : Mechanik
+'         + {get/set} WybranyMechanik : Mechanik
+'         + {get/set} Mechanicy : ObservableCollection<Mechanik>
+'         - ZapiszDane()
+'         - _zapisz : ICommand
+'         + Zapisz : ICommand
+'     }
+'     class MainWindowViewModel{
+'         + {get/set} Zlecenia : ObservableCollection<ZlecenieNaprawyWrapper>
+'         + {get/set} WybraneZlecenie : ZlecenieNaprawyWrapper
+'         - OtworzOknoSzczegolow(ZlecenieNaprawy wybraneZlecenie)
+'         - _loaded : ICommand
+'         + Loaded : ICommand
+'         - _dodajNoweZlecenie : ICommand
+'         + DodajNoweZlecenie : ICommand
+'         - _szczegolyZlecenia : ICommand
+'         + SzczegolyZlecenia : ICommand
+'         - _dodajMechanika : ICommand
+'         + DodajMechanika : ICommand
+'     }
+'     class SzczegolyUsterkiViewModel{
+'         - _idZlecenie : int 
+'         + {get/set} Mechanicy : ObservableCollection<Mechanik>
+'         - _wybranyMechanik : Mechanik
+'         + WybranyMechanik : Mechanik
+'         + {get/set} WybranaUsterka : Usterka
+'         - _wybranaCzesc : Czesc
+'         + WybranaCzesc : Czesc
+'         + {get/set} Czesci : ObservableCollection<Czesc>
+'         - WczytajMechanikow()
+'         - _loaded : ICommand
+'         + Loaded : ICommand
+'         - _zapisz : ICommand
+'         + Zapisz : ICommand
+'         - _zapiszCzesci : ICommand
+'         + ZapiszCzesci : ICommand
+'         - _dodajCzesci : ICommand
+'         + DodajCzesci : ICommand
+'     }
+'     class SzczegolyZleceniaViewModel{
+'         - _idKlienta : int
+'         - _numerTelefonuKlienta : string
+'         + {get/set} NumerTelefonuKlienta : string
+'         - _numerRejestracyjny : string
+'         + {get/set} NumerRejestracyjny : string
+'         + {get/set} WybranySamochod : Samochod
+'         - _wybraneZlecenie : ZlecenieNaprawy
+'         + {get/set} WybraneZlecenie : ZlecenieNaprawy
+'         + {get/set} Usterki : ObservableCollection<Usterka>
+'         + {get/set} WybranaUsterka : Usterka
+'         + {get/set} Czesci : ObservableCollection<Czesc>
+'         + {get/set} WystawionaFaktura : Faktura
+'     }
+'     class ViewModelBase{
+'         - OtworzOknoSzczegolow(Usterka wybranaUsterka)
+'         - ZapiszDane()
+'         - WczytajUsterki
+'         - _loaded : ICommand
+'         + Loaded : ICommand
+'         - _zapisz : ICommand
+'         + Zapisz : ICommand
+'         - _dodajNowaUsterke : ICommand
+'         + DodajNowaUsterke : ICommand
+'         - _szczegolyUsterki : ICommand
+'         + SzczegolyUsterki : ICommand
+'         - _wystawFakture : ICommand
+'         + WystawFakture : ICommand
+'         - _otworzFakture : ICommand
+'         + OtworzFakture : ICommand
+'     }
+' }
+
+UsterkaWrapper --> Usterka
+ZlecenieNaprawyWrapper --> ZlecenieNaprawy
+FakturaConstructor -- Faktura
+KlientConstrucktor -- Klient
+SamochodConstructor -- Samochod
+
+Czesc o- Usterka
+Usterka o-- ZlecenieNaprawy
+Faktura --o Usterka
+Faktura --o Czesc
+Faktura - ZlecenieNaprawy
+Klient -o ZlecenieNaprawy
+Mechanik -o Usterka
+Samochod -o ZlecenieNaprawy
+
+ZlecenieNaprawy -- FakturaConstructor
+ZlecenieNaprawy -- KlientConstrucktor
+ZlecenieNaprawy -- SamochodConstructor
+
+Common -- Model
 
 @enduml
