@@ -1,0 +1,39 @@
+@startuml
+
+' actor Klient 
+' actor Pracownik
+
+' usecase (Definiowanie samochodu)
+' usecase (Definiowanie usterek)
+' usecase (Wybór części)
+' usecase (Zamówienie części)
+' usecase (Odebranie części)
+' usecase (Zlecenie napraw)
+' usecase (Potwierdzenie napraw)
+' usecase (Drukowanie faktury)
+' usecase (Płatność)
+
+' Klient -- (Definiowanie samochodu)
+' Klient -- (Definiowanie usterek)
+' Klient --- (Płatność)
+
+' Pracownik -- (Definiowanie samochodu)
+' Pracownik -- (Definiowanie usterek)
+' Pracownik -- (Wybór części)
+' Pracownik -- (Zamówienie części)
+' Pracownik -- (Odebranie części)
+' Pracownik -- (Zlecenie napraw)
+' Pracownik -- (Potwierdzenie napraw)
+' Pracownik -- (Drukowanie faktury)
+
+' (Definiowanie samochodu) --> (Definiowanie usterek)
+' (Definiowanie usterek) --> (Zlecenie napraw)
+' (Definiowanie usterek) --> (Wybór części)
+' (Wybór części) --> (Zamówienie części)
+' (Zamówienie części) --> (Odebranie części)
+' (Odebranie części) --> (Zlecenie napraw)
+' (Zlecenie napraw) --> (Potwierdzenie napraw)
+' (Potwierdzenie napraw) --> (Drukowanie faktury)
+' (Drukowanie faktury) -> (Płatność)
+
+@enduml
