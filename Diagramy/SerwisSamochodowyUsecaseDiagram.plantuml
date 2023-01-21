@@ -1,6 +1,5 @@
 @startuml
 
-actor Klient 
 actor Pracownik
 
 usecase (Definiowanie samochodu)
@@ -13,18 +12,14 @@ usecase (Potwierdzenie napraw)
 usecase (Drukowanie faktury)
 usecase (Płatność)
 
-Klient -- (Definiowanie samochodu)
-Klient -- (Definiowanie usterek)
-Klient -- (Płatność)
-
 Pracownik -- (Definiowanie samochodu)
 Pracownik -- (Definiowanie usterek)
-Pracownik --- (Wybór części)
-Pracownik --- (Zamówienie części)
-Pracownik --- (Odebranie części)
-Pracownik --- (Zlecenie napraw)
-Pracownik --- (Potwierdzenie napraw)
-Pracownik --- (Drukowanie faktury)
+Pracownik -- (Wybór części)
+Pracownik -- (Zamówienie części)
+Pracownik -- (Odebranie części)
+Pracownik -- (Zlecenie napraw)
+Pracownik -- (Potwierdzenie napraw)
+Pracownik -- (Drukowanie faktury)
 Pracownik -- (Płatność)
 
 @enduml
