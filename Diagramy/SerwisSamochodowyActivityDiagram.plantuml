@@ -1,6 +1,115 @@
 @startuml
 
-' actor Klient 
+partition wejscie {
+(*) --> przyjście klienta
+--> definiowanie klienta
+if "klient rozpoznany" as if1 then
+    -->[NIE] uzupełnienie danych klienta
+    --> definiowanie samochodu
+else
+    -->[TAK] wczytanie danych klienta
+    --> definiowanie samochodu
+    if "samochód rozpoznany" as if2 then
+        -->[NIE] uzupełnienie danych samochodu
+        --> definiowanie usterek
+    else
+        -->[TAK]  wczytanie danych samochodu
+        --> definiowanie usterek
+
+        if "wszystkie usterki zdefiniowane" as if3 then
+            -->[TAK] przejdźDoPracNadSamochodem
+            else
+            -->[NIE] zdefiniuj nową usterkę
+            --> definiowanie części
+            if "potrzebne kolejne części" as if4 then
+              -->[NIE] if3
+            else
+                -->[TAK] zdefiniuj część
+                --> if4
+            endif
+        endif
+    endif
+endif
+}
+
+partition praceNadSamochodem {
+    przejdźDoPracNadSamochodem --> początek napraw
+    --> zamawianie części
+    if"wszystkie części zamówione" as if5 then
+        -->[NIE] zamów część
+        --> if5
+    else
+       -->[TAK] odbieranie części
+        if"wszystkie części odebrane" as if6 then
+            -->[NIE] czekaj na dostawę
+            --> if6
+        else
+            -->[TAK] przypisywanie mechanika
+            if"każda usterka ma przypisanego mechanika" as if7 then
+                -->[NIE] przypisz mechanika
+                --> if7
+            else
+                -->[TAK] naprawa usterek
+                if"wszystkie usterki naprawione" as if8 then
+                    -->[TAK] przejdzDoZwrotuSamochodu
+                    else
+                    -->[NIE] przystąp do napraw
+                    if"wymaga wymiany części" as if9 then
+                        -->[NIE] napraw
+                        --> if8
+                    else
+                        -->[TAK] wymiana części
+                        if"wszystkie części wymienione" as if10 then
+                            -->[NIE] wymień część
+                            --> if10
+                        else
+                            -->[TAK] napraw
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endif
+}
+
+partition zwrotSamochodu {
+    przejdzDoZwrotuSamochodu --> powiadom klienta
+    --> wydrukuj fakturę
+    --> przyjmij płatność
+    --> wydaj samochód
+}
+
+
+
+
+' (*) --> "Wejscie klienta do sklepu"
+' if "Klient zakończył zakupy"  as if1 then 
+'     --> [TAK] "Rozpoczęcie płatności"
+'     --> if "Wybrany typ płatności" then
+'         --> [Karta] "Wykładnie towar" as w1
+'         --> "Płatność kartą"
+'         --> === B1 ===
+'         --> "Autoryzacja w banku" 
+'         --> === B2 ===
+'         === B1 === --> "Aktualizacja stanów" 
+'         --> === B2 ===
+'         === B1 === --> "Wydruk paragonów" 
+'         --> === B2 ===
+'         --> (*)
+'         else 
+'         --> [Gotówka] "Wykładie towar" as w2 
+'         --> "Płatność gotówką"
+'         -->(*)
+'         else 
+'         --> [Kasa samoobsługowa] "Skanowanie towaru"
+'         --> "Płatność kartą"
+'     endif        
+' else 
+'     --> [NIE] "Wybór towaru z półki"
+'     --> "Dodanie towaru do koszyka"
+'     --> if1
+' endif
+
 ' actor Pracownik
 
 ' usecase (Definiowanie samochodu)
