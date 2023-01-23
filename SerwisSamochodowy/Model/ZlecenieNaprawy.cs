@@ -19,7 +19,7 @@ namespace SerwisSamochodowy.Model
         public DateTime DataPrzyjecia { get; private set; }
         public bool Naprawione { get; set; }
         public bool ZgloszoneZakonczenieNapraw { get; set; }
-        public DateTime DataOdbioru { get; private set; }
+        public DateTime DataOdbioru { get; set; }
         public bool Zaplacone { get; set; }
         public bool Odebrane { get; set; }
 

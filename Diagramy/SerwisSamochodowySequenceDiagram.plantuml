@@ -1,0 +1,47 @@
+@startuml
+
+'człowiek używający aplikacji
+actor Pracownik
+
+Pracownik -> Klient : szukanie danych klienta
+activate Klient
+
+alt kompletne dane
+else niekompletne dane
+Klient -> Klient : uzupełnione dane klienta
+end
+
+Pracownik -> Samochód : szukanie danych samochodu
+activate Samochód
+
+alt kompletne dane
+else niekompletne dane
+Samochód -> Samochód : uzupełnione dane samochodu
+end
+
+Pracownik -> ZlecenieNaprawy : nowe zlecenie naprawy
+activate ZlecenieNaprawy
+
+group foreach usterki
+
+ZlecenieNaprawy -> Usterka : nowe usterki
+activate Usterka
+
+group foreach Część
+Usterka -> Część : nowa część
+activate Część
+return
+end
+
+return
+end
+
+return kompletne ZlecenieNaprawy
+
+deactivate ZlecenieNaprawy
+deactivate Samochód
+deactivate Klient
+
+
+
+@enduml
