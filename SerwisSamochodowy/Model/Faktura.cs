@@ -56,7 +56,7 @@ namespace SerwisSamochodowy.Model
             result += "Data wystawienia: \r\n" + DataWystawienia + "\r\n";
 
             int licznik = 1;
-            foreach(var koszt in Koszty)
+            foreach (var koszt in Koszty)
             {
                 result += licznik + " " + koszt.Key + ": " + koszt.Value + "\r\n";
                 licznik++;
@@ -64,13 +64,18 @@ namespace SerwisSamochodowy.Model
 
             result += "Suma: \r\n" + Suma + "\r\n";
 
+            ZapiszDoPliku(result);
+        }
+
+        private void ZapiszDoPliku(string result)
+        {
             if (!Directory.Exists(Staticks.FolderFaktur))
                 Directory.CreateDirectory(Staticks.FolderFaktur);
 
             var fileName = IdFaktura + ".txt";
-            File.WriteAllText(Staticks.FolderFaktur + "\\" + fileName , result);
+            File.WriteAllText(Staticks.FolderFaktur + "\\" + fileName, result);
 
-            using (Process fileopener = new Process())
+            using (var fileopener = new Process())
             {
                 fileopener.StartInfo.FileName = Staticks.FolderFaktur + "\\" + fileName;
                 fileopener.Start();

@@ -27,7 +27,8 @@ folder Model{
         + {get/private set} Suma : float
 
         + {static} WczytajFakture(int idZlecenieNaprawy) : Faktura
-        +OtworzFakture : void
+        + OtworzFakture() : void
+        - ZapiszDoPliku() : void
     }
 
     class Klient{

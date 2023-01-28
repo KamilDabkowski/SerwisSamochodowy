@@ -187,7 +187,10 @@ namespace SerwisSamochodowy.ViewModel
                      },
                      (object argument) =>
                      {
-                         return true;
+                         if (WybraneZlecenie != null && WybraneZlecenie.IdZlecenie > 0)
+                             return true;
+                         else
+                             return false;
                      }
                     );
                 return _dodajNowaUsterke;
@@ -207,7 +210,10 @@ namespace SerwisSamochodowy.ViewModel
                      },
                      (object argument) =>
                      {
-                         return true;
+                         if (WybraneZlecenie != null && WybraneZlecenie.IdZlecenie > 0)
+                             return true;
+                         else
+                             return false;
                      }
                     );
                 return _szczegolyUsterki;
@@ -230,7 +236,7 @@ namespace SerwisSamochodowy.ViewModel
                      },
                      (object argument) =>
                      {
-                         if (WystawionaFaktura == null)
+                         if (WybraneZlecenie != null && WybraneZlecenie.IdZlecenie > 0 && WystawionaFaktura == null)
                              return true;
                          else
                              return false;
@@ -254,8 +260,8 @@ namespace SerwisSamochodowy.ViewModel
                      },
                      (object argument) =>
                      {
-                         if (WystawionaFaktura != null)
-                             return true;
+                         if (WystawionaFaktura == null)
+                             return false;
                          else
                              return true;
                      }

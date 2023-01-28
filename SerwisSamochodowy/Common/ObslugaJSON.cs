@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SerwisSamochodowy.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SerwisSamochodowy.Model.Helpers
+namespace SerwisSamochodowy.Common
 {
     internal static class ObslugaJSON<T>
     {

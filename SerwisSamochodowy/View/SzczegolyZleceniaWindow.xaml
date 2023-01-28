@@ -94,8 +94,9 @@
         <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding WystawionaFaktura.Numer, Mode=OneWay}"
                  IsEnabled="False"/>
         <StackPanel Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-        <Button Content="Wystaw fakturę" Command="{Binding WystawFakture}" Width="150"/>
-        <Button Content="Otwórz fakturę" Command="{Binding OtworzFakture}" Width="150"/>
+            <Button Content="Zapisz zlecenie" Command="{Binding Zapisz}" Width="150" />
+            <Button Content="Wystaw fakturę" Command="{Binding WystawFakture}" Width="150"/>
+            <Button Content="Otwórz fakturę" Command="{Binding OtworzFakture}" Width="150"/>
         </StackPanel>
 
         <!--usterki-->
@@ -145,6 +146,5 @@
         <Button Grid.Column="2" Width="120" Content="Szczegóły usterki" Command="{Binding SzczegolyUsterki}" />
         </Grid>
 
-        <Button Grid.Column="5" Grid.Row="11" HorizontalAlignment="Right" Width="120" Content="Zapisz" Command="{Binding Zapisz}" />
     </Grid>
 </Window>

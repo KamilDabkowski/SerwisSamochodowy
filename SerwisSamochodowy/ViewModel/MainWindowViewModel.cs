@@ -102,7 +102,12 @@ namespace SerwisSamochodowy.ViewModel
                     _szczegolyZlecenia = new RelayCommand(
                      (object argument) =>
                      {
-                         OtworzOknoSzczegolow(WybraneZlecenie.ZlecenieNaprawy);
+
+                         if (WybraneZlecenie != null && WybraneZlecenie.ZlecenieNaprawy.IdZlecenie > 0)
+                             OtworzOknoSzczegolow(WybraneZlecenie.ZlecenieNaprawy);
+                         else
+                             MessageBox.Show("Nie wybrano zlecenia");
+
                      },
                      (object argument) =>
                      {
